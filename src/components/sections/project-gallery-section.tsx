@@ -41,6 +41,7 @@ const projectsData: Project[] = [
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
     category: "Web",
     githubUrl: "#",
+    liveUrl: "#", // Added liveUrl
   },
   {
     id: "3",
@@ -61,6 +62,7 @@ const projectsData: Project[] = [
     tags: ["React Native", "API", "Mobile"],
     category: "Mobile",
     githubUrl: "#",
+    liveUrl: "#", // Added liveUrl
   },
 ];
 
@@ -137,3 +139,4 @@ export function ProjectGallerySection() {
     </section>
   );
 }
+
