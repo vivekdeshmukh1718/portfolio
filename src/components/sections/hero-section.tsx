@@ -30,7 +30,7 @@ export function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-6 border-2 border-solid border-green-500 p-4 rounded-md">
-              <Button size="lg" asChild className="font-mono bg-green-500 text-gray-900 hover:bg-green-600">
+              <Button size="lg" asChild className="font-mono bg-blue-500 text-white hover:bg-blue-600">
                 <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
                   <Download className="mr-2 h-5 w-5" />
                   Download CV
