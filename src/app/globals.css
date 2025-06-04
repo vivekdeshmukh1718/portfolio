@@ -8,6 +8,11 @@ body {
 }
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+    scroll-padding-top: 5rem; /* Adjust if header height + desired margin changes from ~4rem (h-16) */
+  }
+
   :root {
     --background: 0 0% 98%; /* Light Gray #FAFAFA */
     --foreground: 0 0% 20%; /* Dark Gray #333333 */

@@ -1,5 +1,6 @@
 
 "use client"
+import * as React from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,11 @@ const navItems = [
 
 export function Header() {
   const isMobile = useIsMobile();
+  const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+
+  const handleLinkClick = () => {
+    setIsSheetOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -27,7 +33,7 @@ export function Header() {
         </Link>
 
         {isMobile ? (
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
@@ -41,6 +47,7 @@ export function Header() {
                     key={item.label}
                     href={item.href}
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                    onClick={handleLinkClick}
                   >
                     {item.label}
                   </Link>
