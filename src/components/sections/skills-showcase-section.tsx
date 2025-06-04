@@ -27,7 +27,7 @@ function SkillCategory({ title, skills, icon }: SkillCategoryProps) {
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2">
         {skills.map((skill) => (
-          <Badge key={skill} variant="secondary" className="text-sm px-3 py-1 bg-accent/20 text-accent-foreground hover:bg-accent/30">
+          <Badge key={skill} variant="secondary" className="text-sm px-3 py-1 bg-accent text-accent-foreground hover:bg-accent/90 dark:hover:bg-accent/80">
             {skill}
           </Badge>
         ))}
