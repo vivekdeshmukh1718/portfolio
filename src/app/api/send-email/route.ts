@@ -1,5 +1,16 @@
 
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+// IMPORTANT: Move this API key to an environment variable (e.g., .env file)
+// and access it via process.env.RESEND_API_KEY in a real application.
+// Example: const resend = new Resend(process.env.RESEND_API_KEY);
+const RESEND_API_KEY = 're_F4SZfMn2_2dKFrAK2VrwpGch73n2E7jgS';
+const resend = new Resend(RESEND_API_KEY);
+
+// You should ideally use a "from" address on a domain you control and have verified with Resend.
+const FROM_EMAIL = 'onboarding@resend.dev'; 
+const TO_EMAIL = 'vivekdeshmukh1718@gmail.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,39 +20,42 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields: name, email, and message are required.' }, { status: 400 });
     }
 
-    // SERVER-SIDE LOGGING (for demonstration)
-    // TODO: Integrate a transactional email service (e.g., Resend, SendGrid, AWS SES) here.
-    // This is where you'll use their SDK or API to send the email to 'vivekdeshmukh1718@gmail.com'.
-    // Ensure API keys are stored securely as environment variables and accessed only on the server.
+    try {
+      const { data, error } = await resend.emails.send({
+        from: FROM_EMAIL,
+        to: TO_EMAIL,
+        subject: `New Contact Form Submission from ${name}`,
+        html: `
+          <h1>New Contact Form Submission</h1>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        `,
+        reply_to: email, // Set the sender's email as the reply-to address
+      });
 
-    console.log('--- Contact Form Submission Received ---');
-    console.log(`Timestamp: ${new Date().toISOString()}`);
-    console.log(`Sender Name: ${name}`);
-    console.log(`Sender Email: ${email}`);
-    console.log(`Message: ${message}`);
-    console.log(`Intended Recipient: vivekdeshmukh1718@gmail.com`);
-    console.log('--- End of Submission ---');
+      if (error) {
+        console.error('Resend API Error:', error);
+        return NextResponse.json({ error: 'Failed to send email due to Resend API error.', details: error.message }, { status: 500 });
+      }
 
-    // Simulate email sending success for now.
-    // Replace 'true' with the actual success status from your email service.
-    const emailSentSuccessfully = true; 
-
-    if (emailSentSuccessfully) {
+      console.log('Email sent successfully via Resend:', data);
       return NextResponse.json({ 
         success: true, 
-        message: "Message received successfully. (Note: This is a simulation. Backend email integration is pending.)" 
+        message: "Message sent successfully! Thank you for reaching out." 
       });
-    } else {
-      // This block would be hit if your email service reported a failure.
-      return NextResponse.json({ error: 'Failed to send email (simulated backend failure).' }, { status: 500 });
+
+    } catch (apiError: any) {
+      console.error('Error sending email with Resend:', apiError);
+      return NextResponse.json({ error: 'Internal server error while attempting to send email.', details: apiError.message || 'Unknown error' }, { status: 500 });
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error processing contact form submission:', error);
-    // Differentiate between JSON parsing errors and other errors if possible
     if (error instanceof SyntaxError) {
         return NextResponse.json({ error: 'Invalid request body: Could not parse JSON.' }, { status: 400 });
     }
-    return NextResponse.json({ error: 'Internal server error while processing your message.' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error while processing your message.', details: error.message || 'Unknown error' }, { status: 500 });
   }
 }
