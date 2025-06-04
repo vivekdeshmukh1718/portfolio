@@ -11,7 +11,8 @@ import { CertificationsSection } from "@/components/sections/certifications-sect
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { VisitorStatsSection } from "@/components/sections/visitor-stats-section";
 import { AiAssistant } from "@/components/ai-assistant";
-import AnalogClock from "@/components/analog-clock"; // Import the new AnalogClock
+import AnalogClock from "@/components/analog-clock"; 
+import DigitalClock from "@/components/digital-clock"; // Import the DigitalClock
 
 export default function HomePage() {
   return (
@@ -22,11 +23,11 @@ export default function HomePage() {
           <div className="lg:w-3/5 xl:w-2/3 flex items-center"> {/* Adjusted width proportions */}
             <HeroSection />
           </div>
-          <div className="lg:w-2/5 xl:w-1/3 flex justify-center items-center py-8 lg:py-0"> {/* Clock container */}
+          <div className="lg:w-2/5 xl:w-1/3 flex flex-col items-center justify-center gap-4 py-8 lg:py-0"> {/* Clock container - now flex-col and with gap */}
             <AnalogClock />
+            <DigitalClock /> {/* Added DigitalClock here */}
           </div>
         </div>
-        {/* Removed DigitalClock from here */}
         <AboutMeSection />
         <SkillsShowcaseSection />
         <ProjectGallerySection />
