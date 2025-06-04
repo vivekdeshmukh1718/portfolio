@@ -3,19 +3,42 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AnalogClock = () => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    // Set initial time immediately on mount for client-side only
+    setTime(new Date());
+
     const timerId = setInterval(() => {
       setTime(new Date());
     }, 1000);
     return () => clearInterval(timerId);
-  }, []);
+  }, []); // Empty dependency array ensures this runs once on mount and cleans up
+
+  const clockSize = 280; // For a "large" clock
+  const center = clockSize / 2;
+  const strokeWidth = 2;
+  const handBaseOffsetY = 15; // To make hands pivot slightly above true center
+
+  if (time === null) {
+    // Render a placeholder during SSR and initial client render before effect runs
+    return (
+      <Card className="w-fit shadow-xl border-2 border-border p-4" style={{ width: `${clockSize}px`, height: `${clockSize}px` }}>
+        <CardContent className="p-0 flex items-center justify-center h-full">
+          <div className="flex flex-col items-center">
+            <Skeleton className="h-10 w-10 rounded-full mb-2" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   const getRotation = (unit: 'hours' | 'minutes' | 'seconds') => {
-    const now = time;
+    const now = time; // time is guaranteed to be a Date object here
     let rotation = 0;
     switch (unit) {
       case 'hours':
@@ -30,11 +53,6 @@ const AnalogClock = () => {
     }
     return rotation;
   };
-
-  const clockSize = 280; // For a "large" clock
-  const center = clockSize / 2;
-  const strokeWidth = 2;
-  const handBaseOffsetY = 15; // To make hands pivot slightly above true center
 
   return (
     <Card className="w-fit shadow-xl border-2 border-border p-4">
