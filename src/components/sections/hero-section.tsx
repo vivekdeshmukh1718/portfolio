@@ -64,7 +64,7 @@ export function HeroSection() {
 
 
   return (
-    <section id="hero" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-background to-secondary/30 dark:from-background dark:to-secondary/10">
+    <section id="hero" className="w-full pt-6 pb-12 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32 bg-gradient-to-br from-background to-secondary/30 dark:from-background dark:to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           
