@@ -4,33 +4,36 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils"; // Added this import
 
-const AnalogClock = () => {
+interface AnalogClockProps {
+  clockSize?: number;
+  className?: string;
+}
+
+const AnalogClock: React.FC<AnalogClockProps> = ({ clockSize: initialClockSize = 280, className }) => {
   const [time, setTime] = useState<Date | null>(null);
+  const clockSize = initialClockSize; // Use the prop or default
 
   useEffect(() => {
-    // Set initial time immediately on mount for client-side only
     setTime(new Date());
-
     const timerId = setInterval(() => {
       setTime(new Date());
     }, 1000);
     return () => clearInterval(timerId);
-  }, []); // Empty dependency array ensures this runs once on mount and cleans up
+  }, []);
 
-  const clockSize = 280; // For a "large" clock
   const center = clockSize / 2;
-  const strokeWidth = 2;
-  const handBaseOffsetY = 15; // To make hands pivot slightly above true center
+  const handBaseOffsetY = clockSize * 0.053; // Relative offset
+  const baseStrokeWidth = Math.max(1, clockSize / 140); // Ensure stroke width is at least 1
 
   if (time === null) {
-    // Render a placeholder during SSR and initial client render before effect runs
     return (
-      <Card className="w-fit shadow-xl border-2 border-border p-4" style={{ width: `${clockSize}px`, height: `${clockSize}px` }}>
+      <Card className={cn("w-fit shadow-xl border-2 border-border p-2", className)} style={{ width: `${clockSize}px`, height: `${clockSize}px` }}>
         <CardContent className="p-0 flex items-center justify-center h-full">
           <div className="flex flex-col items-center">
-            <Skeleton className="h-10 w-10 rounded-full mb-2" />
-            <Skeleton className="h-4 w-24" />
+            <Skeleton className="rounded-full mb-1" style={{height: `${clockSize * 0.2}px`, width: `${clockSize * 0.2}px`}} />
+            <Skeleton style={{height: `${clockSize * 0.05}px`, width: `${clockSize * 0.5}px`}}/>
           </div>
         </CardContent>
       </Card>
@@ -38,7 +41,7 @@ const AnalogClock = () => {
   }
 
   const getRotation = (unit: 'hours' | 'minutes' | 'seconds') => {
-    const now = time; // time is guaranteed to be a Date object here
+    const now = time;
     let rotation = 0;
     switch (unit) {
       case 'hours':
@@ -54,8 +57,17 @@ const AnalogClock = () => {
     return rotation;
   };
 
+  const hourMarkLength = clockSize * 0.035;
+  const minuteMarkLength = clockSize * 0.018;
+  const markDistanceFromEdge = clockSize * 0.035;
+
+  const hourHandLength = center * 0.5;
+  const minuteHandLength = center * 0.7;
+  const secondHandLength = center * 0.8;
+
+
   return (
-    <Card className="w-fit shadow-xl border-2 border-border p-4">
+    <Card className={cn("w-fit shadow-xl border-2 border-border p-1 md:p-2", className)} style={{ width: `${clockSize}px`, height: `${clockSize}px` }}>
       <CardContent className="p-0">
         <svg
           width={clockSize}
@@ -63,45 +75,43 @@ const AnalogClock = () => {
           viewBox={`0 0 ${clockSize} ${clockSize}`}
           className="drop-shadow-lg"
         >
-          {/* Clock Face */}
           <circle
             cx={center}
             cy={center}
-            r={center - strokeWidth}
+            r={center - baseStrokeWidth}
             fill="hsl(var(--card))"
             stroke="hsl(var(--foreground))"
-            strokeWidth={strokeWidth * 2}
+            strokeWidth={baseStrokeWidth * 1.5}
           />
           
-          {/* Center Dot */}
-          <circle cx={center} cy={center} r={strokeWidth * 2.5} fill="hsl(var(--accent))" />
+          <circle cx={center} cy={center} r={baseStrokeWidth * 2} fill="hsl(var(--accent))" />
 
           {/* Hour Marks */}
           {Array.from({ length: 12 }).map((_, i) => (
             <line
               key={`hour-mark-${i}`}
-              x1={center + (center - 10) * Math.cos(Math.PI / 6 * i - Math.PI / 2)}
-              y1={center + (center - 10) * Math.sin(Math.PI / 6 * i - Math.PI / 2)}
-              x2={center + (center - 20) * Math.cos(Math.PI / 6 * i - Math.PI / 2)}
-              y2={center + (center - 20) * Math.sin(Math.PI / 6 * i - Math.PI / 2)}
+              x1={center + (center - markDistanceFromEdge) * Math.cos(Math.PI / 6 * i - Math.PI / 2)}
+              y1={center + (center - markDistanceFromEdge) * Math.sin(Math.PI / 6 * i - Math.PI / 2)}
+              x2={center + (center - markDistanceFromEdge - hourMarkLength) * Math.cos(Math.PI / 6 * i - Math.PI / 2)}
+              y2={center + (center - markDistanceFromEdge - hourMarkLength) * Math.sin(Math.PI / 6 * i - Math.PI / 2)}
               stroke="hsl(var(--foreground))"
-              strokeWidth={strokeWidth + 1}
+              strokeWidth={baseStrokeWidth * 1.2}
               strokeLinecap="round"
             />
           ))}
 
-           {/* Minute Marks */}
-           {Array.from({ length: 60 }).map((_, i) => {
-            if (i % 5 !== 0) { // Don't draw over hour marks
+           {/* Minute Marks (only if clock is large enough) */}
+           {clockSize > 50 && Array.from({ length: 60 }).map((_, i) => {
+            if (i % 5 !== 0) { 
               return (
                 <line
                   key={`minute-mark-${i}`}
-                  x1={center + (center - 10) * Math.cos(Math.PI / 30 * i - Math.PI / 2)}
-                  y1={center + (center - 10) * Math.sin(Math.PI / 30 * i - Math.PI / 2)}
-                  x2={center + (center - 15) * Math.cos(Math.PI / 30 * i - Math.PI / 2)}
-                  y2={center + (center - 15) * Math.sin(Math.PI / 30 * i - Math.PI / 2)}
+                  x1={center + (center - markDistanceFromEdge) * Math.cos(Math.PI / 30 * i - Math.PI / 2)}
+                  y1={center + (center - markDistanceFromEdge) * Math.sin(Math.PI / 30 * i - Math.PI / 2)}
+                  x2={center + (center - markDistanceFromEdge - minuteMarkLength) * Math.cos(Math.PI / 30 * i - Math.PI / 2)}
+                  y2={center + (center - markDistanceFromEdge - minuteMarkLength) * Math.sin(Math.PI / 30 * i - Math.PI / 2)}
                   stroke="hsl(var(--muted-foreground))"
-                  strokeWidth={strokeWidth / 2}
+                  strokeWidth={Math.max(1, baseStrokeWidth * 0.5)}
                   strokeLinecap="round"
                 />
               );
@@ -109,15 +119,14 @@ const AnalogClock = () => {
             return null;
           })}
 
-
           {/* Hour Hand */}
           <line
             x1={center}
             y1={center + handBaseOffsetY}
             x2={center}
-            y2={center - center * 0.45}
+            y2={center - hourHandLength + handBaseOffsetY}
             stroke="hsl(var(--foreground))"
-            strokeWidth={strokeWidth * 3}
+            strokeWidth={baseStrokeWidth * 2.5}
             strokeLinecap="round"
             transform={`rotate(${getRotation('hours')} ${center} ${center})`}
             style={{ transition: 'transform 0.5s ease-in-out' }}
@@ -128,9 +137,9 @@ const AnalogClock = () => {
             x1={center}
             y1={center + handBaseOffsetY}
             x2={center}
-            y2={center - center * 0.65}
+            y2={center - minuteHandLength + handBaseOffsetY}
             stroke="hsl(var(--foreground))"
-            strokeWidth={strokeWidth * 2}
+            strokeWidth={baseStrokeWidth * 1.8}
             strokeLinecap="round"
             transform={`rotate(${getRotation('minutes')} ${center} ${center})`}
             style={{ transition: 'transform 0.5s ease-in-out' }}
@@ -139,17 +148,16 @@ const AnalogClock = () => {
           {/* Second Hand */}
           <line
             x1={center}
-            y1={center + handBaseOffsetY + 10} // Extend a bit below center
+            y1={center + handBaseOffsetY + (clockSize * 0.035)} 
             x2={center}
-            y2={center - center * 0.75}
+            y2={center - secondHandLength + handBaseOffsetY}
             stroke="hsl(var(--accent))"
-            strokeWidth={strokeWidth}
+            strokeWidth={baseStrokeWidth}
             strokeLinecap="round"
             transform={`rotate(${getRotation('seconds')} ${center} ${center})`}
-            style={{ transition: 'transform 0.2s linear' }} // Faster, linear transition for seconds
+            style={{ transition: 'transform 0.2s linear' }}
           />
-           {/* Center Dot (on top of hands) */}
-          <circle cx={center} cy={center} r={strokeWidth * 2} fill="hsl(var(--accent))" stroke="hsl(var(--background))" strokeWidth={strokeWidth/2}/>
+          <circle cx={center} cy={center} r={baseStrokeWidth * 1.8} fill="hsl(var(--accent))" stroke="hsl(var(--background))" strokeWidth={baseStrokeWidth * 0.5}/>
         </svg>
       </CardContent>
     </Card>
