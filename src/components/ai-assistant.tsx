@@ -17,7 +17,12 @@ interface Message {
   sender: "user" | "ai";
 }
 
-export function AiAssistant() {
+interface AiAssistantProps {
+  triggerOpenWithQuery?: string | null;
+  onProgrammaticOpenHandled?: () => void;
+}
+
+export function AiAssistant({ triggerOpenWithQuery, onProgrammaticOpenHandled }: AiAssistantProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -31,24 +36,36 @@ export function AiAssistant() {
     }
   }, [messages]);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (triggerOpenWithQuery) {
+      setIsOpen(true);
+      setInput(triggerOpenWithQuery);
+      // Do not automatically submit, let the user review and press send.
+      onProgrammaticOpenHandled?.(); 
+    }
+  }, [triggerOpenWithQuery, onProgrammaticOpenHandled]);
+
+
+  const handleSubmit = async (e?: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { id: Date.now().toString(), text: input, sender: "user" };
     setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+    // setInput(""); // Keep input for context if AI fails or user wants to re-send
     setIsLoading(true);
 
     try {
-      const aiInput: SiteAssistantInput = { query: input };
+      const aiInput: SiteAssistantInput = { query: input }; // use the current input state
       const aiOutput: SiteAssistantOutput = await siteAssistant(aiInput);
       
       const aiMessage: Message = { id: (Date.now() + 1).toString(), text: aiOutput.answer, sender: "ai" };
       setMessages((prev) => [...prev, aiMessage]);
+      setInput(""); // Clear input only on successful AI response
     } catch (error) {
       console.error("Error calling AI assistant:", error);
-      const errorMessage: Message = { id: (Date.now() + 1).toString(), text: "Sorry, I encountered an error. Please try again.", sender: "ai" };
+      const errorMessageText = error instanceof Error ? error.message : "Sorry, I encountered an error. Please try again.";
+      const errorMessage: Message = { id: (Date.now() + 1).toString(), text: errorMessageText, sender: "ai" };
       setMessages((prev) => [...prev, errorMessage]);
       toast({
         title: "AI Assistant Error",
@@ -59,10 +76,21 @@ export function AiAssistant() {
       setIsLoading(false);
     }
   };
+  
+  const handleDialogChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+        // If dialog is closed, and it might have been opened by a query,
+        // ensure the parent's trigger state is reset if it hasn't been already.
+        if(triggerOpenWithQuery){
+            onProgrammaticOpenHandled?.();
+        }
+    }
+  };
 
   return (
     <>
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={isOpen} onOpenChange={handleDialogChange}>
         <DialogTrigger asChild>
           <Button
             size="lg"
@@ -102,7 +130,7 @@ export function AiAssistant() {
                         : "bg-muted"
                     }`}
                   >
-                    <p className="text-sm">{msg.text}</p>
+                    <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                   </div>
                    {msg.sender === "user" && (
                     <div className="p-2 rounded-full bg-secondary text-secondary-foreground">
@@ -144,3 +172,4 @@ export function AiAssistant() {
     </>
   );
 }
+

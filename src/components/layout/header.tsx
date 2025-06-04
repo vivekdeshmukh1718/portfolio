@@ -20,7 +20,11 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  onSearchSubmit?: (query: string) => void;
+}
+
+export function Header({ onSearchSubmit }: HeaderProps) {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
@@ -33,23 +37,29 @@ export function Header() {
     setSearchText("");
     searchInputRef.current?.focus();
   };
+
+  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && searchText.trim() !== "") {
+      onSearchSubmit?.(searchText.trim());
+      // clearSearch(); // Optionally clear search after submit, or let AiAssistant handle it
+    }
+  };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between gap-2 md:gap-4">
-        {/* Left Group: Logo and Search (Always Visible) */}
         <div className="flex items-center gap-2 flex-shrink min-w-0 md:flex-1">
           <Link href="/" className="flex items-center mr-0 md:mr-2 flex-shrink-0" onClick={handleLinkClick}>
             <SquareTerminal className="h-7 w-7 text-primary" />
           </Link>
-          {/* Search input container - removed max-w classes to allow expansion */}
           <div className="relative flex-grow"> 
             <Input
               ref={searchInputRef}
               type="search"
-              placeholder="Search..."
+              placeholder="Ask AI Assistant..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               className="h-9 w-full search-input-animated-border pr-8" 
             />
             {searchText && (
@@ -66,7 +76,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right Group: Desktop Nav, Theme Toggle, Mobile Menu Trigger */}
         <div className="flex items-center gap-1 md:gap-2">
           <nav className="hidden md:flex items-center gap-1 text-sm">
             {navItems.map((item) => (
@@ -80,7 +89,7 @@ export function Header() {
             ))}
           </nav>
           
-          <div className="flex items-center gap-2"> {/* Theme toggle always visible */}
+          <div className="flex items-center gap-0.5"> 
             <ThemeToggle />
           </div>
 
@@ -104,8 +113,11 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="mt-auto border-t pt-4 space-y-4">
-                {/* AnalogClock already removed from sheet content in previous step */}
+              <div className="mt-auto border-t pt-4 space-y-4 flex flex-col items-center">
+                {/* AnalogClock for mobile sheet moved here in previous steps, keeping it if user wants */}
+                 {/* <AnalogClock clockSize={60} className="mb-2"/>  */}
+                 {/* ThemeToggle moved into sheet previously, keeping it if user wants */}
+                 {/* <ThemeToggle /> */}
               </div>
             </SheetContent>
           </Sheet>
