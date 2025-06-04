@@ -15,7 +15,7 @@ export function HeroSection() {
               <span>portfolio_os@vivek:~$ ./initiate_intro.sh</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-green-300">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-rose-500">
                 <span className="terminal-cursor">Vivek Kailash Deshmukh</span>
               </h1>
               <p className="max-w-[600px] text-green-400 md:text-lg">
@@ -29,7 +29,7 @@ export function HeroSection() {
                 <span className="terminal-cursor"></span>
               </p>
             </div>
-            <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-6 border-2 border-dashed border-green-500 p-4 rounded-md">
+            <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-6 border-2 border-solid border-green-500 p-4 rounded-md">
               <Button size="lg" asChild className="font-mono bg-green-500 text-gray-900 hover:bg-green-600">
                 <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
                   <Download className="mr-2 h-5 w-5" />
