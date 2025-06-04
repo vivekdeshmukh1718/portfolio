@@ -65,9 +65,8 @@ export function AiAssistant() {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
-            variant="default"
             size="lg"
-            className="fixed bottom-6 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center"
+            className="fixed bottom-6 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-accent text-accent-foreground hover:bg-accent/90"
             aria-label="Open AI Assistant"
           >
             <Bot className="h-8 w-8" />
@@ -76,7 +75,7 @@ export function AiAssistant() {
         <DialogContent className="sm:max-w-[425px] md:max-w-lg flex flex-col h-[70vh] max-h-[600px]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Bot className="h-6 w-6 text-primary" /> AI Site Assistant
+              <Bot className="h-6 w-6 text-accent" /> AI Site Assistant
             </DialogTitle>
             <DialogDescription>
               Ask me anything about Vivek, his skills, or projects.
@@ -92,14 +91,14 @@ export function AiAssistant() {
                   }`}
                 >
                   {msg.sender === "ai" && (
-                    <div className="p-2 rounded-full bg-primary text-primary-foreground">
+                    <div className="p-2 rounded-full bg-accent text-accent-foreground">
                       <Bot className="h-5 w-5" />
                     </div>
                   )}
                   <div
                     className={`max-w-[75%] p-3 rounded-lg ${
                       msg.sender === "user"
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-accent text-accent-foreground"
                         : "bg-muted"
                     }`}
                   >
@@ -114,7 +113,7 @@ export function AiAssistant() {
               ))}
                {isLoading && (
                 <div className="flex items-start gap-2">
-                   <div className="p-2 rounded-full bg-primary text-primary-foreground">
+                   <div className="p-2 rounded-full bg-accent text-accent-foreground">
                       <Bot className="h-5 w-5" />
                     </div>
                   <div className="max-w-[75%] p-3 rounded-lg bg-muted flex items-center">
