@@ -5,10 +5,10 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, SquareTerminal, Search, X } from "lucide-react";
+import { Menu, SquareTerminal, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import AnalogClock from "@/components/analog-clock"; // Import AnalogClock
+// Removed AnalogClock import as it's no longer used in the header
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -65,7 +65,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right Group: Desktop Nav, Theme Toggle, Clock, Mobile Menu Trigger */}
+        {/* Right Group: Desktop Nav, Theme Toggle, Mobile Menu Trigger */}
         <div className="flex items-center gap-1 md:gap-2">
           <nav className="hidden md:flex items-center gap-1 text-sm">
             {navItems.map((item) => (
@@ -81,7 +81,7 @@ export function Header() {
           
           <div className="hidden md:flex items-center gap-2">
             <ThemeToggle />
-            <AnalogClock clockSize={36} className="border-0 shadow-none p-0 bg-transparent dark:bg-transparent" />
+            {/* AnalogClock removed from here */}
           </div>
 
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -109,9 +109,7 @@ export function Header() {
                     <span className="text-sm text-muted-foreground">Theme</span>
                     <ThemeToggle />
                 </div>
-                <div className="flex justify-center items-center py-2">
-                   <AnalogClock clockSize={60} />
-                </div>
+                {/* AnalogClock removed from here */}
               </div>
             </SheetContent>
           </Sheet>
