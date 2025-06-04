@@ -15,7 +15,6 @@ const navItems = [
   { label: "Internships", href: "/#internships" },
   { label: "Achievements", href: "/#achievements" },
   { label: "Certifications", href: "/#certifications" },
-  // { label: "AI Idea Lab", href: "/#ai-idea-lab" }, // Removed as per request
   { label: "Contact", href: "/contact" }, 
 ];
 

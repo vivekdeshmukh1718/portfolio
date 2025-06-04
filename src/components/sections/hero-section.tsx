@@ -9,34 +9,34 @@ export function HeroSection() {
       <div className="container px-4 md:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           
-          <div className="flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-lg shadow-xl bg-gray-900 dark:bg-gray-800 font-mono text-sm text-green-400">
+          <div className="flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-lg shadow-xl bg-gray-900 dark:bg-black font-mono text-sm text-green-300">
             <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
               <Terminal className="h-4 w-4" />
               <span>portfolio_os@vivek:~$ ./initiate_intro.sh</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-rose-500">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent">
                 <span className="terminal-cursor">Vivek Kailash Deshmukh</span>
               </h1>
-              <p className="max-w-[600px] text-green-400 md:text-lg">
-                <span className="text-blue-400">const</span> role = <span className="text-yellow-300">"Full-Stack Developer"</span>;
+              <p className="max-w-[600px] text-green-300 md:text-lg">
+                <span className="text-sky-400">const</span> role = <span className="text-yellow-300">"Full-Stack Developer"</span>;
                 <br />
-                <span className="text-blue-400">const passions</span> = [<span className="text-yellow-300">"Innovator"</span>, <span className="text-yellow-300">"Problem Solver"</span>];
+                <span className="text-sky-400">const</span> passions = [<span className="text-yellow-300">"Innovator"</span>, <span className="text-yellow-300">"Problem Solver"</span>];
               </p>
-              <p className="max-w-[600px] text-green-400/90 md:text-base">
+              <p className="max-w-[600px] text-gray-400 md:text-base">
                 <span className="text-gray-500">// Crafting seamless digital experiences with cutting-edge tech.</span><br/>
                 <span className="text-gray-500">// Passionate about building scalable and user-centric web applications.</span>
                 <span className="terminal-cursor"></span>
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-6 border-2 border-solid border-green-500 p-4 rounded-md">
-              <Button size="lg" asChild className="font-mono bg-blue-500 text-white hover:bg-blue-600">
+              <Button size="lg" asChild className="font-sans">
                 <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
                   <Download className="mr-2 h-5 w-5" />
                   Download CV
                 </a>
               </Button>
-              <Button size="lg" asChild className="font-mono bg-gray-700 text-green-400 border border-green-400 hover:bg-gray-600 hover:text-green-300">
+              <Button variant="outline" size="lg" asChild className="font-sans text-green-400 border-green-400 hover:bg-green-500/10 hover:text-green-300">
                 <a href="/#projects">
                   View Projects
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -55,7 +55,7 @@ export function HeroSection() {
               data-ai-hint="professional portrait developer matrix"
               width={600}
               height={600}
-              className="mx-auto aspect-square rounded-xl object-cover transition-all duration-500 ease-out hover:[transform:rotateX(10deg)_rotateY(-10deg)_scale(1.05)] hover:shadow-2xl dark:hover:shadow-primary/30"
+              className="mx-auto aspect-square rounded-xl object-cover transition-all duration-500 ease-out hover:[transform:rotateX(10deg)_rotateY(-10deg)_scale(1.05)] hover:shadow-2xl dark:hover:shadow-accent/30"
             />
           </div>
         </div>
