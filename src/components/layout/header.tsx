@@ -13,7 +13,9 @@ const navItems = [
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
   { label: "Internships", href: "/#internships" },
-  { label: "AI Idea Lab", href: "/#ai-idea-lab" }, // Link to new section
+  { label: "Achievements", href: "/#achievements" },
+  { label: "Certifications", href: "/#certifications" },
+  { label: "AI Idea Lab", href: "/#ai-idea-lab" },
   { label: "Contact", href: "/contact" }, 
 ];
 

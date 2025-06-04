@@ -6,6 +6,8 @@ import { AboutMeSection } from "@/components/sections/about-me-section";
 import { SkillsShowcaseSection } from "@/components/sections/skills-showcase-section";
 import { ProjectGallerySection } from "@/components/sections/project-gallery-section";
 import { InternshipOverviewSection } from "@/components/sections/internship-overview-section";
+import { AchievementsSection } from "@/components/sections/achievements-section";
+import { CertificationsSection } from "@/components/sections/certifications-section";
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { AiAssistant } from "@/components/ai-assistant";
 
@@ -19,7 +21,9 @@ export default function HomePage() {
         <SkillsShowcaseSection />
         <ProjectGallerySection />
         <InternshipOverviewSection />
-        <AiIdeaGeneratorSection /> {/* New section added here */}
+        <AchievementsSection />
+        <CertificationsSection />
+        <AiIdeaGeneratorSection />
       </main>
       <Footer />
       <AiAssistant />
