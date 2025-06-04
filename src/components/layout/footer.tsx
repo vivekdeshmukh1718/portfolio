@@ -32,12 +32,12 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://github.com/vivekdeshmukh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Link href="https://github.com/vivekdeshmukh1718" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Github className="h-5 w-5" />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://linkedin.com/in/vivekkailashdeshmukh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <Link href="https://www.linkedin.com/in/vivekdeshmukhsoftwaredeveloper" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </Link>
           </Button>
@@ -47,22 +47,22 @@ export function Footer() {
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="mailto:youremail@example.com" aria-label="Email">
+            <Link href="mailto:vivekdeshmukh1718@gmail.com" aria-label="Email">
               <Mail className="h-5 w-5" />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://instagram.com/your_username" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <Link href="https://instagram.com/vivek_deshmukh_3412" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram className="h-5 w-5" />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <Link href="https://wa.me/9156569060" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <WhatsAppIcon />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <Link href="https://t.me/vikkie_4u" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
               <TelegramIcon />
             </Link>
           </Button>
