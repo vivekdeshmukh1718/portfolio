@@ -66,7 +66,7 @@ export function AiAssistant() {
         <DialogTrigger asChild>
           <Button
             size="lg"
-            className="fixed bottom-6 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-accent text-accent-foreground hover:bg-accent/90"
+            className="fixed bottom-6 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-purple-600 text-white hover:bg-purple-700"
             aria-label="Open AI Assistant"
           >
             <Bot className="h-8 w-8" />
@@ -75,7 +75,7 @@ export function AiAssistant() {
         <DialogContent className="sm:max-w-[425px] md:max-w-lg flex flex-col h-[70vh] max-h-[600px]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Bot className="h-6 w-6 text-accent" /> AI Site Assistant
+              <Bot className="h-6 w-6 text-red-500" /> AI Site Assistant
             </DialogTitle>
             <DialogDescription>
               Ask me anything about Vivek, his skills, or projects.
@@ -91,14 +91,14 @@ export function AiAssistant() {
                   }`}
                 >
                   {msg.sender === "ai" && (
-                    <div className="p-2 rounded-full bg-accent text-accent-foreground">
+                    <div className="p-2 rounded-full bg-red-500 text-white">
                       <Bot className="h-5 w-5" />
                     </div>
                   )}
                   <div
                     className={`max-w-[75%] p-3 rounded-lg ${
                       msg.sender === "user"
-                        ? "bg-accent text-accent-foreground"
+                        ? "bg-purple-500 text-white"
                         : "bg-muted"
                     }`}
                   >
@@ -113,11 +113,11 @@ export function AiAssistant() {
               ))}
                {isLoading && (
                 <div className="flex items-start gap-2">
-                   <div className="p-2 rounded-full bg-accent text-accent-foreground">
+                   <div className="p-2 rounded-full bg-red-500 text-white">
                       <Bot className="h-5 w-5" />
                     </div>
                   <div className="max-w-[75%] p-3 rounded-lg bg-muted flex items-center">
-                    <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                    <Loader2 className="h-5 w-5 animate-spin mr-2 text-red-500" />
                     <p className="text-sm">Thinking...</p>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ export function AiAssistant() {
                 disabled={isLoading}
                 aria-label="Your question for the AI assistant"
               />
-              <Button type="submit" disabled={isLoading || !input.trim()} size="icon">
+              <Button type="submit" disabled={isLoading || !input.trim()} size="icon" className="bg-purple-600 text-white hover:bg-purple-700">
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 <span className="sr-only">Send message</span>
               </Button>
