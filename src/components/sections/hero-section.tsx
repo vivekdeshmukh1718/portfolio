@@ -11,8 +11,8 @@ const phrasesToType = [
   "A Full-Stack Developer",
   "Explore his amazing portfolio",
 ];
-const TYPING_SPEED = 120;
-const DELETING_SPEED = 60;
+const TYPING_SPEED = 120; // Was 150
+const DELETING_SPEED = 60; // Was 75
 const DELAY_AFTER_TYPING = 2000; // ms to wait after a phrase is fully typed
 const DELAY_AFTER_DELETING = 500; // ms to wait after a phrase is fully deleted
 
@@ -76,7 +76,7 @@ export function HeroSection() {
               <span>portfolio_os@vivek:~$ ./initiate_intro.sh</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent min-h-[3rem]">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent min-h-[3rem] md:min-h-[4rem]">
                 <span className="terminal-cursor">{typedText}</span>
               </h1>
               <p className="max-w-[600px] text-green-300 md:text-lg">
@@ -87,11 +87,11 @@ export function HeroSection() {
                 <span className="text-gray-500">// Passionate about building scalable and user-centric web applications.</span>
               </p>
             </div>
-            <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-2 border-2 border-solid border-green-500 p-4 rounded-md">
+            <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-2 border-2 border-solid border-green-500 p-4 rounded-md bg-white">
               <Button 
                 size="lg" 
                 asChild 
-                className="font-mono bg-blue-500 hover:bg-blue-600 text-gray-900"
+                className="font-sans bg-blue-500 hover:bg-blue-600 text-gray-900 dark:text-white" 
               >
                 <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
                   <Download className="mr-2 h-5 w-5" />
@@ -102,7 +102,7 @@ export function HeroSection() {
                 variant="outline" 
                 size="lg" 
                 asChild 
-                className="font-mono text-green-400 border-green-400 hover:bg-green-500/20 hover:text-green-300"
+                className="font-sans text-green-600 border-green-500 hover:bg-green-500/10 hover:text-green-700 hover:border-green-600 dark:text-green-400 dark:border-green-400 dark:hover:bg-green-400/10 dark:hover:text-green-300 dark:hover:border-green-300"
               >
                 <a href="/#projects">
                   View Projects
@@ -130,3 +130,4 @@ export function HeroSection() {
     </section>
   );
 }
+
