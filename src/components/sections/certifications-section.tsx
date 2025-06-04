@@ -1,5 +1,5 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, CalendarDays, ExternalLink } from "lucide-react";
 
@@ -8,6 +8,7 @@ interface Certification {
   name: string;
   issuingOrganization: string;
   dateObtained: string;
+  description?: string; // Optional: for a brief description if needed in the future
   credentialUrl?: string;
 }
 
@@ -49,26 +50,29 @@ export function CertificationsSection() {
           {certificationsData.map((cert) => (
             <Card key={cert.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
               <CardHeader>
-                <div className="flex items-start gap-3 mb-1">
-                    <FileText className="h-7 w-7 text-primary mt-1 flex-shrink-0" />
+                <div className="flex items-center gap-3 mb-2">
+                    <FileText className="h-8 w-8 text-primary" />
                     <CardTitle className="text-xl">{cert.name}</CardTitle>
                 </div>
                 <CardDescription className="text-sm text-muted-foreground">{cert.issuingOrganization}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow space-y-2">
+                {cert.description && (
+                    <p className="text-muted-foreground">{cert.description}</p>
+                )}
                 <div className="flex items-center text-xs text-muted-foreground">
                   <CalendarDays className="mr-1.5 h-3.5 w-3.5" />
                   <span>Obtained: {cert.dateObtained}</span>
                 </div>
               </CardContent>
               {cert.credentialUrl && cert.credentialUrl !== "#" && (
-                <CardContent className="pt-0">
-                  <Button variant="outline" size="sm" asChild className="mt-2">
+                <CardFooter>
+                  <Button variant="outline" size="sm" asChild className="mt-auto">
                     <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer">
                       View Credential <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
-                </CardContent>
+                </CardFooter>
               )}
             </Card>
           ))}

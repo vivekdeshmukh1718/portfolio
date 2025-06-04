@@ -30,14 +30,14 @@ export function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4">
-              <Button size="lg" variant="ghost" className="bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/50" asChild>
+              <Button size="lg" variant="default" asChild>
                 <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
                   <Download className="mr-2 h-5 w-5" />
                   Download CV
                 </a>
               </Button>
-              <Button variant="outline" size="lg" className="bg-transparent hover:bg-green-500/10 text-green-400 border-green-500/50" asChild>
-                <a href="#projects">
+              <Button variant="outline" size="lg" asChild>
+                <a href="/#projects">
                   View Projects
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
