@@ -6,6 +6,7 @@ import { AboutMeSection } from "@/components/sections/about-me-section";
 import { SkillsShowcaseSection } from "@/components/sections/skills-showcase-section";
 import { ProjectGallerySection } from "@/components/sections/project-gallery-section";
 import { InternshipOverviewSection } from "@/components/sections/internship-overview-section";
+import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { AiAssistant } from "@/components/ai-assistant";
 
 export default function HomePage() {
@@ -18,7 +19,7 @@ export default function HomePage() {
         <SkillsShowcaseSection />
         <ProjectGallerySection />
         <InternshipOverviewSection />
-        {/* Other sections like Contact/Feedback form can be added here later */}
+        <AiIdeaGeneratorSection /> {/* New section added here */}
       </main>
       <Footer />
       <AiAssistant />

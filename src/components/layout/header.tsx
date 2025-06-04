@@ -13,6 +13,7 @@ const navItems = [
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
   { label: "Internships", href: "/#internships" },
+  { label: "AI Idea Lab", href: "/#ai-idea-lab" }, // Link to new section
   { label: "Contact", href: "/contact" }, 
 ];
 
@@ -27,7 +28,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2" onClick={handleLinkClick}>
           <Code2 className="h-6 w-6 text-primary" />
           <span className="font-bold text-lg">Vivek's Digital Canvas</span>
         </Link>
