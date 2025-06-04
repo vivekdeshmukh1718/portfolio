@@ -41,7 +41,7 @@ const projectsData: Project[] = [
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
     category: "Web",
     githubUrl: "#",
-    liveUrl: "#", // Added liveUrl
+    liveUrl: "#",
   },
   {
     id: "3",
@@ -51,6 +51,7 @@ const projectsData: Project[] = [
     imageHint: "chatbot artificial intelligence",
     tags: ["Genkit", "Next.js", "AI", "NLP"],
     category: "AI",
+    githubUrl: "#", // Added GitHub URL placeholder
     liveUrl: "#",
   },
    {
@@ -62,7 +63,7 @@ const projectsData: Project[] = [
     tags: ["React Native", "API", "Mobile"],
     category: "Mobile",
     githubUrl: "#",
-    liveUrl: "#", // Added liveUrl
+    liveUrl: "#",
   },
 ];
 
@@ -139,4 +140,3 @@ export function ProjectGallerySection() {
     </section>
   );
 }
-
