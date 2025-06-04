@@ -35,14 +35,16 @@ export function HeroSection() {
               </Button>
             </div>
           </div>
-          <Image
-            src="https://placehold.co/600x600.png"
-            alt="Vivek Kailash Deshmukh"
-            data-ai-hint="professional portrait developer"
-            width={600}
-            height={600}
-            className="mx-auto aspect-square overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
-          />
+          <div className="[perspective:1000px]">
+            <Image
+              src="https://placehold.co/600x600.png"
+              alt="Vivek Kailash Deshmukh"
+              data-ai-hint="professional portrait developer"
+              width={600}
+              height={600}
+              className="mx-auto aspect-square rounded-xl object-cover sm:w-full lg:order-last transition-all duration-300 ease-out hover:[transform:rotateX(5deg)_rotateY(-5deg)_scale(1.05)] hover:shadow-2xl"
+            />
+          </div>
         </div>
       </div>
     </section>
