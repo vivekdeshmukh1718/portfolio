@@ -11,6 +11,7 @@ import { CertificationsSection } from "@/components/sections/certifications-sect
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { VisitorStatsSection } from "@/components/sections/visitor-stats-section";
 import { AiAssistant } from "@/components/ai-assistant";
+import DigitalClock from "@/components/digital-clock";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,9 @@ export default function HomePage() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
+        <div className="container flex justify-center items-center py-6 text-lg font-medium">
+          <DigitalClock />
+        </div>
         <AboutMeSection />
         <SkillsShowcaseSection />
         <ProjectGallerySection />
