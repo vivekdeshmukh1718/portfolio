@@ -66,7 +66,7 @@ export function AiAssistant() {
         <DialogTrigger asChild>
           <Button
             size="lg"
-            className="fixed bottom-28 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-purple-600 text-white hover:bg-purple-700"
+            className="fixed bottom-40 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-purple-600 text-white hover:bg-purple-700"
             aria-label="Open AI Assistant"
           >
             <Bot className="h-14 w-14" />
