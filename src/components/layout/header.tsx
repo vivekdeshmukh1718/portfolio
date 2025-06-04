@@ -8,7 +8,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, SquareTerminal, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-// Removed AnalogClock import as it's no longer used in the header
+// AnalogClock import is no longer needed here if it's fully removed.
+// However, if other parts of the app use it, keep it.
+// For now, I'll assume it might be used elsewhere and leave the import,
+// but if it's exclusively for the header, we can remove this line.
+// import AnalogClock from "@/components/analog-clock"; 
 
 const navItems = [
   { label: "About", href: "/#about" },
