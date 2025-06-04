@@ -15,8 +15,8 @@ export function HeroSection() {
               <span>portfolio_os@vivek:~$ ./initiate_intro.sh</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-green-300 terminal-cursor">
-                Vivek Kailash Deshmukh
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-green-300">
+                <span className="terminal-cursor">Vivek Kailash Deshmukh</span>
               </h1>
               <p className="max-w-[600px] text-green-400 md:text-lg">
                 <span className="text-blue-400">const</span> role = <span className="text-yellow-300">"Full-Stack Developer"</span>;
@@ -36,7 +36,7 @@ export function HeroSection() {
                   Download CV
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild className="font-sans">
+              <Button variant="outline" size="lg" asChild className="font-sans text-green-400 border-green-400 hover:text-accent-foreground hover:bg-accent">
                 <a href="/#projects">
                   View Projects
                   <ArrowRight className="ml-2 h-5 w-5" />
