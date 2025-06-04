@@ -8,11 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, SquareTerminal, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-// AnalogClock import is no longer needed here if it's fully removed.
-// However, if other parts of the app use it, keep it.
-// For now, I'll assume it might be used elsewhere and leave the import,
-// but if it's exclusively for the header, we can remove this line.
-// import AnalogClock from "@/components/analog-clock"; 
+import AnalogClock from "@/components/analog-clock";
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -46,14 +42,15 @@ export function Header() {
           <Link href="/" className="flex items-center mr-0 md:mr-2 flex-shrink-0" onClick={handleLinkClick}>
             <SquareTerminal className="h-7 w-7 text-primary" />
           </Link>
-          <div className="relative flex-grow max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+          {/* Search input container - removed max-w classes to allow expansion */}
+          <div className="relative flex-grow"> 
             <Input
               ref={searchInputRef}
               type="search"
               placeholder="Search..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="h-9 w-full search-input-animated-border pr-8" // Padding for X button
+              className="h-9 w-full search-input-animated-border pr-8" 
             />
             {searchText && (
               <Button 
@@ -83,9 +80,8 @@ export function Header() {
             ))}
           </nav>
           
-          <div className="hidden md:flex items-center gap-2">
+          <div className="flex items-center gap-2"> {/* Theme toggle always visible */}
             <ThemeToggle />
-            {/* AnalogClock removed from here */}
           </div>
 
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -109,11 +105,7 @@ export function Header() {
                 ))}
               </nav>
               <div className="mt-auto border-t pt-4 space-y-4">
-                <div className="flex justify-between items-center px-2">
-                    <span className="text-sm text-muted-foreground">Theme</span>
-                    <ThemeToggle />
-                </div>
-                {/* AnalogClock removed from here */}
+                {/* AnalogClock already removed from sheet content in previous step */}
               </div>
             </SheetContent>
           </Sheet>
