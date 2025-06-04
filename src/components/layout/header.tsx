@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Code2 } from "lucide-react";
+import { Menu, SquareTerminal } from "lucide-react"; // Changed Code2 to SquareTerminal
 import { useIsMobile } from "@/hooks/use-mobile"; 
 
 const navItems = [
@@ -29,9 +29,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" onClick={handleLinkClick}>
-          <Code2 className="h-6 w-6 text-primary" />
-          <span className="font-bold text-lg">Vivek's Digital Canvas</span>
+        <Link href="/" className="flex items-center" onClick={handleLinkClick}> {/* Removed gap-2 */}
+          <SquareTerminal className="h-7 w-7 text-primary" /> {/* Replaced Code2 icon and text span */}
         </Link>
 
         {isMobile ? (
