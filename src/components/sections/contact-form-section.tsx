@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { User, MailIcon, MessageSquare, Send } from "lucide-react";
+import { User, MailIcon, MessageSquare, Send, Loader2 } from "lucide-react";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }).max(50, { message: "Name must not exceed 50 characters." }),
@@ -40,14 +40,39 @@ export function ContactFormSection() {
   });
 
   async function onSubmit(data: ContactFormValues) {
-    // In a real application, you would send this data to a server or email service.
-    console.log("Contact form submitted:", data);
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-      variant: "default", 
-    });
-    form.reset(); // Reset form after submission
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast({
+          title: "Message Sent!",
+          description: result.message || "Thank you for reaching out. I'll get back to you soon.",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error Sending Message",
+          description: result.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Failed to submit contact form:", error);
+      toast({
+        title: "Error Sending Message",
+        description: "Could not connect to the server. Please check your connection and try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -113,7 +138,9 @@ export function ContactFormSection() {
                 />
                 <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                   {form.formState.isSubmitting ? (
-                     "Sending..."
+                     <>
+                       <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
+                     </>
                   ) : (
                     <>
                      <Send className="mr-2 h-4 w-4" /> Send Message
