@@ -23,9 +23,9 @@ export default function HomePage() {
           <div className="lg:w-3/5 xl:w-2/3 flex items-center"> {/* Adjusted width proportions */}
             <HeroSection />
           </div>
-          <div className="lg:w-2/5 xl:w-1/3 flex flex-col items-center justify-center gap-4 py-8 lg:py-0"> {/* Clock container - now flex-col and with gap */}
+          <div className="lg:w-2/5 xl:w-1/3 flex flex-col lg:flex-row items-center justify-center gap-4 py-8 lg:py-0"> {/* Clock container - flex-col for mobile, lg:flex-row for large screens */}
             <AnalogClock />
-            <DigitalClock /> {/* Added DigitalClock here */}
+            <DigitalClock />
           </div>
         </div>
         <AboutMeSection />
