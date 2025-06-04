@@ -119,3 +119,20 @@ body {
 section {
   @apply py-12 md:py-20 lg:py-24;
 }
+
+/* Blinking cursor animation for Terminal Style Intro */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: hsl(var(--accent)) }
+}
+
+.terminal-cursor::after {
+  content: '_';
+  animation: blink-caret 1s step-end infinite;
+  margin-left: 0.25em;
+  color: hsl(var(--accent)); /* Use accent color for cursor */
+}
+
+.dark .terminal-cursor::after {
+  color: hsl(var(--accent));
+}

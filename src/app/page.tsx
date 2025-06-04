@@ -9,6 +9,7 @@ import { InternshipOverviewSection } from "@/components/sections/internship-over
 import { AchievementsSection } from "@/components/sections/achievements-section";
 import { CertificationsSection } from "@/components/sections/certifications-section";
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
+import { VisitorStatsSection } from "@/components/sections/visitor-stats-section";
 import { AiAssistant } from "@/components/ai-assistant";
 
 export default function HomePage() {
@@ -23,7 +24,8 @@ export default function HomePage() {
         <InternshipOverviewSection />
         <AchievementsSection />
         <CertificationsSection />
-        <AiIdeaGeneratorSection />
+        <VisitorStatsSection />
+        <AiIdeaGeneratorSection /> 
       </main>
       <Footer />
       <AiAssistant />
