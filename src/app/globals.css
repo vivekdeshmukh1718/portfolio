@@ -135,7 +135,14 @@ section {
   color: hsl(var(--accent)); /* Use accent color for cursor */
 }
 
-/* .dark .terminal-cursor::after { */
-  /* color: hsl(var(--accent)); */
-/* } */
+/* Search input focus animation */
+.search-input-animated-border {
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.search-input-animated-border:focus-visible, /* for keyboard focus */
+.search-input-animated-border:focus { /* for programmatic focus */
+  border-color: hsl(var(--ring)) !important; /* important to override base input styles */
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring)) !important;
+  outline: none; /* remove default outline */
+}
 
