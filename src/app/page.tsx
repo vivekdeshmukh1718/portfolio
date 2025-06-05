@@ -15,6 +15,7 @@ import { GitHubActivitySection } from "@/components/sections/github-activity-sec
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { VisitorStatsSection } from "@/components/sections/visitor-stats-section";
 import { AiAssistant } from "@/components/ai-assistant";
+import { ScrollNavigationButtons } from "@/components/scroll-navigation-buttons"; // Added import
 
 export default function HomePage() {
   // const [headerSearchQuery, setHeaderSearchQuery] = useState<string | null>(null); // Removed
@@ -44,6 +45,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <AiAssistant />
+      <ScrollNavigationButtons /> {/* Added component */}
     </div>
   );
 }
