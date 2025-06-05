@@ -82,11 +82,16 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+        'terminal-glow-effect': { /* Renamed to avoid conflict if terminal-glow existed elsewhere */
+          '0%': { boxShadow: '0 0 3px 0px hsla(var(--accent), 0.2), inset 0 0 2px hsla(var(--accent), 0.1)' },
+          '100%': { boxShadow: '0 0 8px 1px hsla(var(--accent), 0.3), inset 0 0 5px hsla(var(--accent), 0.15)' },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'terminal-glow': 'terminal-glow-effect 3s ease-in-out infinite alternate',
   		}
   	}
   },

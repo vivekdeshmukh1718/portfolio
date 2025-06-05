@@ -125,15 +125,24 @@ section {
 /* Blinking cursor animation for Terminal Style Intro */
 @keyframes blink-caret {
   from, to { border-color: transparent }
-  50% { border-color: hsl(var(--accent)) }
+  50% { border-color: hsl(var(--accent)) } /* Simulates blinking by changing border of pseudo-element */
 }
 
 .terminal-cursor::after {
-  content: '_';
-  animation: blink-caret 1s step-end infinite;
-  margin-left: 0.25em;
+  content: '|'; /* Changed from _ to | */
+  /* Using border for blinking effect doesn't work well for '|', let's use opacity */
+  animation: blink-opacity 1s step-end infinite;
+  margin-left: 0.1em; /* Adjusted margin for | */
   color: hsl(var(--accent)); /* Use accent color for cursor */
+  position: relative; /* Needed for potential fine-tuning */
+  /* display: inline-block; If needed for better control */
 }
+
+@keyframes blink-opacity {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 
 /* Search input focus animation */
 .search-input-animated-border {
@@ -146,3 +155,12 @@ section {
   outline: none; /* remove default outline */
 }
 
+/* Terminal Glow Animation */
+@keyframes terminal-glow-effect {
+  0% {
+    box-shadow: 0 0 3px 0px hsla(var(--accent), 0.2), inset 0 0 2px hsla(var(--accent), 0.1);
+  }
+  100% {
+    box-shadow: 0 0 8px 1px hsla(var(--accent), 0.3), inset 0 0 5px hsla(var(--accent), 0.15);
+  }
+}

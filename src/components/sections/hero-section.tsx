@@ -15,19 +15,22 @@ const TYPING_SPEED = 100;
 const DELETING_SPEED = 50; 
 const DELAY_AFTER_TYPING = 2000; 
 const DELAY_AFTER_DELETING = 500; 
+const SHELL_COMMAND_TYPING_SPEED = 75;
+const initialShellCommand = "./initiate_intro.sh";
 
 export function HeroSection() {
   const [typedText, setTypedText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [typedShellCommand, setTypedShellCommand] = useState("");
+  const shellCommandTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const currentPhrase = phrasesToType[phraseIndex];
 
     const handleType = () => {
       if (isDeleting) {
-        // Deleting
         if (typedText.length > 0) {
           setTypedText((prev) => prev.substring(0, prev.length - 1));
           timerRef.current = setTimeout(handleType, DELETING_SPEED);
@@ -37,22 +40,34 @@ export function HeroSection() {
           timerRef.current = setTimeout(handleType, DELAY_AFTER_DELETING);
         }
       } else {
-        // Typing
         if (typedText.length < currentPhrase.length) {
           setTypedText(currentPhrase.substring(0, typedText.length + 1));
           timerRef.current = setTimeout(handleType, TYPING_SPEED);
         } else {
-          // Finished typing current phrase
           timerRef.current = setTimeout(() => {
             setIsDeleting(true);
-            handleType(); // Start deleting
+            // No need to call handleType here, it will be triggered by state change
           }, DELAY_AFTER_TYPING);
         }
       }
     };
-
-    const initialDelay = typedText === "" && !isDeleting && phraseIndex === 0 ? 500 : 0;
-    timerRef.current = setTimeout(handleType, initialDelay + (isDeleting ? DELETING_SPEED : TYPING_SPEED) );
+    
+    // Initial call needs to be careful not to run during deletion phase from previous phrase
+    if (!isDeleting && typedText.length < currentPhrase.length) {
+       timerRef.current = setTimeout(handleType, TYPING_SPEED);
+    } else if (isDeleting && typedText.length > 0) {
+       timerRef.current = setTimeout(handleType, DELETING_SPEED);
+    } else if (!isDeleting && typedText.length === currentPhrase.length) {
+      // This case handles the delay AFTER typing finishes, before deletion starts
+      timerRef.current = setTimeout(() => setIsDeleting(true), DELAY_AFTER_TYPING);
+    } else if (isDeleting && typedText.length === 0) {
+      // This case handles delay AFTER deletion, before next phrase
+      timerRef.current = setTimeout(() => {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrasesToType.length);
+        // Next phrase typing will be triggered by phraseIndex change
+      }, DELAY_AFTER_DELETING);
+    }
 
 
     return () => {
@@ -62,16 +77,30 @@ export function HeroSection() {
     };
   }, [typedText, isDeleting, phraseIndex]);
 
+  useEffect(() => {
+    if (typedShellCommand.length < initialShellCommand.length) {
+      shellCommandTimerRef.current = setTimeout(() => {
+        setTypedShellCommand(initialShellCommand.substring(0, typedShellCommand.length + 1));
+      }, SHELL_COMMAND_TYPING_SPEED);
+    }
+    return () => {
+      if (shellCommandTimerRef.current) {
+        clearTimeout(shellCommandTimerRef.current);
+      }
+    };
+  }, [typedShellCommand]);
+
 
   return (
     <section id="hero" className="w-full pt-6 pb-12 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32 bg-gradient-to-br from-background to-secondary/30 dark:from-background dark:to-secondary/10">
       <div className="container px-4 md:px-6 lg:pr-[100px]">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           
-          <div className="flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-lg shadow-xl bg-gray-900 dark:bg-black font-mono text-sm text-green-300">
+          <div className="flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-lg shadow-xl bg-gray-900 dark:bg-black font-mono text-sm text-green-300 animate-terminal-glow">
             <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
               <Terminal className="h-4 w-4" />
-              <span>portfolio_os@vivek:~$ ./initiate_intro.sh</span>
+              <span>portfolio_os@vivek:~$ </span>
+              <span className={`text-green-300 ${typedShellCommand.length === initialShellCommand.length ? '' : 'terminal-cursor'}`}>{typedShellCommand}</span>
             </div>
             <div className="space-y-3">
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent min-h-[3rem] md:min-h-[4rem]">
@@ -109,7 +138,7 @@ export function HeroSection() {
               </Button>
             </div>
              <div className="mt-auto text-xs text-gray-400">
-              portfolio_os@vivek:~$ <span className="animate-pulse terminal-cursor">_</span>
+              portfolio_os@vivek:~$ <span className="terminal-cursor"></span>
             </div>
           </div>
 
@@ -128,4 +157,3 @@ export function HeroSection() {
     </section>
   );
 }
-
