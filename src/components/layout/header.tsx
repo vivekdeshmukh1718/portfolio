@@ -2,7 +2,7 @@
 "use client"
 import * as React from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation"; // Added usePathname
+import { useRouter, usePathname } from "next/navigation"; 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -22,12 +22,11 @@ const navItems = [
 ];
 
 interface TargetLocation {
-  page: string; // e.g., "/", "/contact"
-  id?: string;  // e.g., "skills", "contact-form"
+  page: string; 
+  id?: string;  
 }
 
 const sectionTargetMap: { [key: string]: TargetLocation } = {
-  // Homepage targets
   "hero": { page: "/", id: "hero" },
   "home": { page: "/", id: "hero" },
   "top": { page: "/", id: "hero" },
@@ -67,8 +66,6 @@ const sectionTargetMap: { [key: string]: TargetLocation } = {
   "idea generator": { page: "/", id: "ai-idea-lab" },
   "ai idea lab": { page: "/", id: "ai-idea-lab" },
   "project idea": { page: "/", id: "ai-idea-lab" },
-
-  // Contact page targets
   "contact": { page: "/contact" },
   "contact me": { page: "/contact" },
   "get in touch": { page: "/contact", id: "contact-form" },
@@ -82,8 +79,36 @@ export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
+  const audioCtxRef = React.useRef<AudioContext | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+
+  React.useEffect(() => {
+    // Initialize AudioContext after a user interaction or on mount
+    // For typing sounds, initializing on mount is generally acceptable.
+    if (typeof window !== 'undefined' && !audioCtxRef.current) {
+      audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+  }, []);
+
+  const playTypingSound = React.useCallback(() => {
+    if (!audioCtxRef.current) return;
+    const audioCtx = audioCtxRef.current;
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.type = 'triangle'; 
+    oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime); 
+    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.05);
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + 0.05);
+  }, []);
 
   const handleLinkClick = (url?: string) => {
     setIsSheetOpen(false);
@@ -94,7 +119,7 @@ export function Header() {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     } else if (url) {
-        router.push(url); // For direct page links like /contact
+        router.push(url); 
     }
   };
 
@@ -103,7 +128,18 @@ export function Header() {
     searchInputRef.current?.focus();
   };
 
+  const isTypingKey = (key: string) => {
+    // Basic check for printable characters, space, backspace, delete
+    // Excludes Enter, Tab, Shift, Ctrl, Alt, Meta, Arrow keys etc.
+    if (key.length === 1 && key.match(/^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]$/)) return true;
+    return ['Backspace', 'Delete'].includes(key);
+  };
+
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isTypingKey(event.key)) {
+      playTypingSound();
+    }
+    
     if (event.key === 'Enter') {
       event.preventDefault();
       const query = searchText.trim().toLowerCase();
@@ -113,9 +149,7 @@ export function Header() {
       const target = sectionTargetMap[query];
 
       if (target) {
-        // Found in map
         if (pathname === target.page) {
-          // On target page
           if (target.id) {
             const element = document.getElementById(target.id);
             if (element) {
@@ -128,7 +162,6 @@ export function Header() {
               actionTaken = true; 
           }
         } else {
-          // Navigate to different page
           let navigationUrl = target.page;
           if (target.id) {
             navigationUrl += '#' + target.id;
@@ -137,19 +170,16 @@ export function Header() {
           actionTaken = true;
         }
       } else {
-        // Not in map, try query as ID on current page
         const element = document.getElementById(query);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           actionTaken = true;
         } else {
-          // Fallback: if not on current page, try as ID on homepage
           if (pathname !== "/") {
             router.push("/#" + query);
             actionTaken = true;
           } else {
             console.warn(`Query '${query}' not found as ID on homepage or in map.`);
-            // Optionally: toast("Section not found");
           }
         }
       }
@@ -222,7 +252,7 @@ export function Header() {
                     e.preventDefault();
                     handleLinkClick(item.href);
                   } else {
-                    handleLinkClick(item.href); // For links like /contact
+                    handleLinkClick(item.href); 
                   }
                 }}
                 className="font-medium text-foreground/80 hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border hover:bg-muted rounded-md"
@@ -254,7 +284,7 @@ export function Header() {
                         e.preventDefault();
                         handleLinkClick(item.href);
                       } else {
-                        handleLinkClick(item.href); // For links like /contact
+                        handleLinkClick(item.href); 
                       }
                     }}
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors block px-3 py-2.5 border border-border/70 hover:bg-muted rounded-md"
@@ -264,7 +294,6 @@ export function Header() {
                 ))}
               </nav>
               <div className="mt-auto border-t pt-4 space-y-4 flex flex-col items-center">
-                 {/* AnalogClock for mobile sheet was removed earlier */}
               </div>
             </SheetContent>
           </Sheet>
