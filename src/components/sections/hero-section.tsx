@@ -96,20 +96,20 @@ export function HeroSection() {
       <div className="container px-4 md:px-6 lg:pr-[100px]">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           
-          <div className="flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-lg shadow-xl bg-gray-900 dark:bg-black font-mono text-sm text-green-300 animate-terminal-glow">
+          <div className="flex flex-col justify-center space-y-6 px-3 py-6 sm:px-6 sm:py-8 rounded-lg shadow-xl bg-gray-900 dark:bg-black font-mono text-sm text-green-300 animate-terminal-glow">
             <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
               <Terminal className="h-4 w-4" />
               <span>portfolio_os@vivek:~$ </span>
               <span className={`text-green-300 ${typedShellCommand.length === initialShellCommand.length ? '' : 'terminal-cursor'}`}>{typedShellCommand}</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent min-h-[3rem] md:min-h-[4rem]">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl/none text-accent min-h-[3rem] md:min-h-[4rem] break-words">
                 <span className="terminal-cursor">{typedText}</span>
               </h1>
-              <p className="max-w-[600px] text-green-300 md:text-lg">
+              <p className="max-w-[600px] text-green-300 md:text-lg break-words">
                 <span className="text-sky-400">const</span> passions = [<span className="text-yellow-300">"Innovator"</span>, <span className="text-yellow-300">"Problem Solver"</span>];
               </p>
-              <p className="max-w-[600px] text-gray-400 md:text-base">
+              <p className="max-w-[600px] text-gray-400 md:text-base break-words">
                 <span className="text-gray-500">// Crafting seamless digital experiences with cutting-edge tech.</span><br/>
                 <span className="text-gray-500">// Passionate about building scalable and user-centric web applications.</span>
               </p>
