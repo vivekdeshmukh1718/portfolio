@@ -3,7 +3,7 @@
 
 import { siteAssistant, type SiteAssistantInput, type SiteAssistantOutput } from "@/ai/flows/site-assistant";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, Send, User, Loader2 } from "lucide-react";
@@ -17,7 +17,6 @@ interface Message {
   sender: "user" | "ai";
 }
 
-// Removed AiAssistantProps as triggerOpenWithQuery and onProgrammaticOpenHandled are no longer used
 export function AiAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -31,8 +30,6 @@ export function AiAssistant() {
       scrollAreaRef.current.scrollTo({ top: scrollAreaRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [messages]);
-
-  // Removed useEffect that depended on triggerOpenWithQuery
 
   const handleSubmit = async (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -66,7 +63,6 @@ export function AiAssistant() {
   
   const handleDialogChange = (open: boolean) => {
     setIsOpen(open);
-    // Removed logic related to triggerOpenWithQuery
   };
 
   return (
@@ -82,14 +78,16 @@ export function AiAssistant() {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] md:max-w-lg flex flex-col h-[70vh] max-h-[600px]">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Bot className="h-6 w-6 text-red-500" /> AI Site Assistant
+          {/* Replaced DialogHeader with a div having similar classes, DialogTitle justification added */}
+          <div className="flex flex-col space-y-1.5 text-center sm:text-left">
+            <DialogTitle className="flex items-center gap-2 justify-center sm:justify-start">
+              <Bot className="h-6 w-6 text-primary" />
+              AI Site Assistant
             </DialogTitle>
             <DialogDescription>
               Ask me anything about Vivek, his skills, or projects.
             </DialogDescription>
-          </DialogHeader>
+          </div>
           <ScrollArea className="flex-grow p-4 border rounded-md my-2" ref={scrollAreaRef as any}>
             <div className="space-y-4">
               {messages.map((msg) => (
@@ -100,7 +98,7 @@ export function AiAssistant() {
                   }`}
                 >
                   {msg.sender === "ai" && (
-                    <div className="p-2 rounded-full bg-red-500 text-white">
+                    <div className="p-2 rounded-full bg-primary text-primary-foreground">
                       <Bot className="h-5 w-5" />
                     </div>
                   )}
@@ -108,7 +106,7 @@ export function AiAssistant() {
                     className={`max-w-[75%] p-3 rounded-lg ${
                       msg.sender === "user"
                         ? "bg-purple-500 text-white"
-                        : "bg-muted"
+                        : "bg-muted text-foreground"
                     }`}
                   >
                     <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
@@ -122,11 +120,11 @@ export function AiAssistant() {
               ))}
                {isLoading && (
                 <div className="flex items-start gap-2">
-                   <div className="p-2 rounded-full bg-red-500 text-white">
+                   <div className="p-2 rounded-full bg-primary text-primary-foreground">
                       <Bot className="h-5 w-5" />
                     </div>
-                  <div className="max-w-[75%] p-3 rounded-lg bg-muted flex items-center">
-                    <Loader2 className="h-5 w-5 animate-spin mr-2 text-red-500" />
+                  <div className="max-w-[75%] p-3 rounded-lg bg-muted text-foreground flex items-center">
+                    <Loader2 className="h-5 w-5 animate-spin mr-2 text-primary" />
                     <p className="text-sm">Thinking...</p>
                   </div>
                 </div>
