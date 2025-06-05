@@ -2,13 +2,13 @@
 "use client"
 import * as React from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation"; // Added usePathname
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import AnalogClock from "@/components/analog-clock"; // Keep if used in mobile sheet
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -21,10 +21,69 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+interface TargetLocation {
+  page: string; // e.g., "/", "/contact"
+  id?: string;  // e.g., "skills", "contact-form"
+}
+
+const sectionTargetMap: { [key: string]: TargetLocation } = {
+  // Homepage targets
+  "hero": { page: "/", id: "hero" },
+  "home": { page: "/", id: "hero" },
+  "top": { page: "/", id: "hero" },
+  "introduction": { page: "/", id: "hero" },
+  "about": { page: "/", id: "about" },
+  "about me": { page: "/", id: "about" },
+  "background": { page: "/", id: "about" },
+  "education": { page: "/", id: "about" }, 
+  "skill": { page: "/", id: "skills" },
+  "skills": { page: "/", id: "skills" },
+  "technical skills": { page: "/", id: "skills" },
+  "technologies": { page: "/", id: "skills" },
+  "project": { page: "/", id: "projects" },
+  "projects": { page: "/", id: "projects" },
+  "my projects": { page: "/", id: "projects" },
+  "work": { page: "/", id: "projects" },
+  "portfolio": { page: "/", id: "projects" },
+  "internship": { page: "/", id: "internships" },
+  "internships": { page: "/", id: "internships" },
+  "experience": { page: "/", id: "internships" },
+  "github": { page: "/", id: "github-activity" },
+  "github activity": { page: "/", id: "github-activity" },
+  "contributions": { page: "/", id: "github-activity" },
+  "achievement": { page: "/", id: "achievements" },
+  "achievements": { page: "/", id: "achievements" },
+  "milestones": { page: "/", id: "achievements" },
+  "awards": { page: "/", id: "achievements" },
+  "certification": { page: "/", id: "certifications" },
+  "certifications": { page: "/", id: "certifications" },
+  "credentials": { page: "/", id: "certifications" },
+  "visitor": { page: "/", id: "visitor-stats" },
+  "visitors": { page: "/", id: "visitor-stats" },
+  "visitor stats": { page: "/", id: "visitor-stats" },
+  "stats": { page: "/", id: "visitor-stats" },
+  "global reach": { page: "/", id: "visitor-stats" },
+  "ai lab": { page: "/", id: "ai-idea-lab" },
+  "idea generator": { page: "/", id: "ai-idea-lab" },
+  "ai idea lab": { page: "/", id: "ai-idea-lab" },
+  "project idea": { page: "/", id: "ai-idea-lab" },
+
+  // Contact page targets
+  "contact": { page: "/contact" },
+  "contact me": { page: "/contact" },
+  "get in touch": { page: "/contact", id: "contact-form" },
+  "message me": { page: "/contact", id: "contact-form" },
+  "send message": { page: "/contact", id: "contact-form" },
+  "contact form": { page: "/contact", id: "contact-form" },
+};
+
+
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleLinkClick = (url?: string) => {
     setIsSheetOpen(false);
@@ -34,6 +93,8 @@ export function Header() {
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    } else if (url) {
+        router.push(url); // For direct page links like /contact
     }
   };
 
@@ -44,18 +105,58 @@ export function Header() {
 
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent default form submission if any
+      event.preventDefault();
       const query = searchText.trim().toLowerCase();
-      if (query) {
+      if (!query) return;
+
+      let actionTaken = false;
+      const target = sectionTargetMap[query];
+
+      if (target) {
+        // Found in map
+        if (pathname === target.page) {
+          // On target page
+          if (target.id) {
+            const element = document.getElementById(target.id);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              actionTaken = true;
+            } else {
+              console.warn(`Mapped ID '${target.id}' not found on page '${target.page}'.`);
+            }
+          } else { 
+              actionTaken = true; 
+          }
+        } else {
+          // Navigate to different page
+          let navigationUrl = target.page;
+          if (target.id) {
+            navigationUrl += '#' + target.id;
+          }
+          router.push(navigationUrl);
+          actionTaken = true;
+        }
+      } else {
+        // Not in map, try query as ID on current page
         const element = document.getElementById(query);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearSearch(); 
+          actionTaken = true;
         } else {
-          // Element not found, keep text in search bar for user to see/modify
-          // Optionally, show a toast message: "Section not found"
-          console.warn(`Element with ID '${query}' not found on this page.`);
+          // Fallback: if not on current page, try as ID on homepage
+          if (pathname !== "/") {
+            router.push("/#" + query);
+            actionTaken = true;
+          } else {
+            console.warn(`Query '${query}' not found as ID on homepage or in map.`);
+            // Optionally: toast("Section not found");
+          }
         }
+      }
+
+      if (actionTaken) {
+        clearSearch();
+        setIsSheetOpen(false);
       }
     }
   };
@@ -65,7 +166,7 @@ export function Header() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between gap-2 md:gap-4">
         <div className="flex items-center gap-2 flex-shrink-0 md:flex-none">
           <Link href="/" className="flex items-center mr-0 md:mr-2" onClick={() => handleLinkClick('/')}>
-            <svg
+             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
               height="28"
@@ -91,7 +192,7 @@ export function Header() {
             <Input
               ref={searchInputRef}
               type="search"
-              placeholder="Search sections (e.g. 'skills', 'projects')..."
+              placeholder="Search sections (e.g. 'skills', 'contact')..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onKeyDown={handleSearchKeyDown}
@@ -121,7 +222,7 @@ export function Header() {
                     e.preventDefault();
                     handleLinkClick(item.href);
                   } else {
-                    handleLinkClick();
+                    handleLinkClick(item.href); // For links like /contact
                   }
                 }}
                 className="font-medium text-foreground/80 hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border hover:bg-muted rounded-md"
@@ -153,7 +254,7 @@ export function Header() {
                         e.preventDefault();
                         handleLinkClick(item.href);
                       } else {
-                        handleLinkClick();
+                        handleLinkClick(item.href); // For links like /contact
                       }
                     }}
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors block px-3 py-2.5 border border-border/70 hover:bg-muted rounded-md"
