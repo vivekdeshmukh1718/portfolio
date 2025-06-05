@@ -65,6 +65,28 @@ const projectsData: Project[] = [
     githubUrl: "#",
     liveUrl: "#",
   },
+  {
+    id: "5",
+    title: "Interactive Data Dashboard",
+    description: "A web-based dashboard for visualizing complex datasets with interactive charts and filters. Built with React and a charting library like Recharts.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "data charts analytics",
+    tags: ["React", "Recharts", "TypeScript", "Data Visualization"],
+    category: "Web",
+    githubUrl: "#",
+    liveUrl: "#",
+  },
+  {
+    id: "6",
+    title: "AI Image Caption Generator",
+    description: "An AI model that automatically generates descriptive captions for images. Implemented using Genkit and a vision model.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "artificial intelligence image recognition",
+    tags: ["Genkit", "Python", "AI", "Computer Vision"],
+    category: "AI",
+    githubUrl: "#",
+    liveUrl: "#",
+  },
 ];
 
 const categories = ["All", "Web", "Mobile", "AI"];
