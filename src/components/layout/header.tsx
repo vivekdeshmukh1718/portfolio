@@ -62,10 +62,12 @@ const sectionTargetMap: { [key: string]: TargetLocation } = {
   "visitor stats": { page: "/", id: "visitor-stats" },
   "stats": { page: "/", id: "visitor-stats" },
   "global reach": { page: "/", id: "visitor-stats" },
-  "ai lab": { page: "/", id: "ai-idea-lab" },
-  "idea generator": { page: "/", id: "ai-idea-lab" },
-  "ai idea lab": { page: "/", id: "ai-idea-lab" },
-  "project idea": { page: "/", id: "ai-idea-lab" },
+  "buildwithdeshmukh": { page: "/", id: "buildwithdeshmukh" },
+  "build with deshmukh": { page: "/", id: "buildwithdeshmukh" },
+  "ai lab": { page: "/", id: "buildwithdeshmukh" }, // Keep old keywords mapping to new ID
+  "idea generator": { page: "/", id: "buildwithdeshmukh" },
+  "ai idea lab": { page: "/", id: "buildwithdeshmukh" },
+  "project idea": { page: "/", id: "buildwithdeshmukh" },
   "contact": { page: "/contact" },
   "contact me": { page: "/contact" },
   "get in touch": { page: "/contact", id: "contact-form" },
@@ -84,8 +86,6 @@ export function Header() {
   const pathname = usePathname();
 
   React.useEffect(() => {
-    // Initialize AudioContext after a user interaction or on mount
-    // For typing sounds, initializing on mount is generally acceptable.
     if (typeof window !== 'undefined' && !audioCtxRef.current) {
       audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
     }
@@ -129,8 +129,6 @@ export function Header() {
   };
 
   const isTypingKey = (key: string) => {
-    // Basic check for printable characters, space, backspace, delete
-    // Excludes Enter, Tab, Shift, Ctrl, Alt, Meta, Arrow keys etc.
     if (key.length === 1 && key.match(/^[a-zA-Z0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]$/)) return true;
     return ['Backspace', 'Delete'].includes(key);
   };

@@ -22,15 +22,14 @@ const TelegramIcon = () => (
 export function Footer() {
   return (
     <footer className="border-t border-border/40">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-        <div className="flex flex-col items-center gap-2 px-8 text-center md:flex-row md:gap-2 md:px-0 md:text-left">
+      <div className="container flex flex-col items-center justify-center gap-4 py-10 md:py-6">
+        <div className="flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:w-full">
           <p className="text-sm leading-loose text-muted-foreground">
             &copy; {new Date().getFullYear()} Vivek Kailash Deshmukh. All rights reserved.
           </p>
-          <span className="hidden md:inline-block mx-1 text-muted-foreground">|</span>
           <DigitalClock />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center flex-wrap justify-center gap-2">
           <Button variant="ghost" size="icon" asChild>
             <Link href="https://github.com/vivekdeshmukh1718" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Github className="h-5 w-5" />

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, Lightbulb, Loader2, AlertTriangle } from "lucide-react";
+import { Sparkles, Lightbulb, Loader2, AlertTriangle, Wrench } from "lucide-react";
 
 export function AiIdeaGeneratorSection() {
   const [keywords, setKeywords] = useState("");
@@ -51,14 +51,14 @@ export function AiIdeaGeneratorSection() {
   };
 
   return (
-    <section id="ai-idea-lab" className="w-full">
+    <section id="buildwithdeshmukh" className="w-full">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl flex items-center gap-2">
-            <Sparkles className="h-8 w-8 text-primary" /> AI Idea Lab <Lightbulb className="h-8 w-8 text-primary" />
+            <Wrench className="h-8 w-8 text-primary" /> BuildWithDeshmukh <Lightbulb className="h-8 w-8 text-primary" />
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Feeling uninspired? Enter some keywords and let AI spark your next unique project idea!
+            Got an idea? Enter some keywords and let AI help you flesh out a unique project concept!
           </p>
         </div>
 
