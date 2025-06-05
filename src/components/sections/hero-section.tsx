@@ -103,7 +103,7 @@ export function HeroSection() {
                 className="font-sans text-green-600 border-green-500 dark:text-green-400 dark:border-green-400 hover:bg-green-500/10 dark:hover:bg-green-400/10"
               >
                 <a href="/#projects">
-                  View Projects
+                  Dive into the Codeverse
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
@@ -128,3 +128,4 @@ export function HeroSection() {
     </section>
   );
 }
+
