@@ -23,7 +23,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40">
       <div className="container flex flex-col items-center justify-center gap-4 py-10 md:py-6">
-        <div className="flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:w-full">
+        <div className="flex flex-col items-center gap-2 text-center md:flex-row md:justify-center md:gap-x-4 md:w-full">
           <p className="text-sm leading-loose text-muted-foreground">
             &copy; {new Date().getFullYear()} Vivek Kailash Deshmukh. All rights reserved.
           </p>
