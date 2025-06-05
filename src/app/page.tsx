@@ -1,6 +1,6 @@
 
 "use client";
-import type { FC } from 'react'; 
+import type { FC } from 'react';
 // import { useState } from "react"; // No longer needed for header search
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -25,11 +25,11 @@ export default function HomePage() {
   // };
 
   // const handleAiAssistantOpenedWithQuery = () => { // Removed
-  //   setHeaderSearchQuery(null); 
+  //   setHeaderSearchQuery(null);
   // };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <Header />
       <main className="flex-grow">
         <HeroSection />
@@ -37,11 +37,11 @@ export default function HomePage() {
         <SkillsShowcaseSection />
         <ProjectGallerySection />
         <InternshipOverviewSection />
-        <GitHubActivitySection /> 
+        <GitHubActivitySection />
         <AchievementsSection />
         <CertificationsSection />
         <VisitorStatsSection />
-        <AiIdeaGeneratorSection /> 
+        <AiIdeaGeneratorSection />
       </main>
       <Footer />
       <AiAssistant />
