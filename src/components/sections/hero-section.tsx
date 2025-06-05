@@ -115,12 +115,12 @@ export function HeroSection() {
 
           <div className="flex items-center justify-center [perspective:1000px]">
             <Image
-              src="https://placehold.co/600x600.png"
+              src="https://placehold.co/450x600.png"
               alt="Vivek Kailash Deshmukh"
               data-ai-hint="professional portrait developer matrix"
-              width={600}
+              width={450}
               height={600}
-              className="mx-auto aspect-square rounded-xl object-cover transition-all duration-500 ease-out hover:[transform:rotateX(10deg)_rotateY(-10deg)_scale(1.05)] hover:shadow-2xl dark:hover:shadow-accent/30"
+              className="mx-auto rounded-xl object-cover transition-all duration-500 ease-out hover:[transform:rotateX(10deg)_rotateY(-10deg)_scale(1.05)] hover:shadow-2xl dark:hover:shadow-accent/30"
             />
           </div>
         </div>
