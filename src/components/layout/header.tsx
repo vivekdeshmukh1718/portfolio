@@ -5,10 +5,10 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, SquareTerminal, X } from "lucide-react";
+import { Menu, X } from "lucide-react"; // Removed SquareTerminal
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import AnalogClock from "@/components/analog-clock";
+// AnalogClock import was removed in a previous step, ensuring it's not re-added
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -50,7 +50,25 @@ export function Header({ onSearchSubmit }: HeaderProps) {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between gap-2 md:gap-4">
         <div className="flex items-center gap-2 flex-shrink min-w-0 md:flex-1">
           <Link href="/" className="flex items-center mr-0 md:mr-2 flex-shrink-0" onClick={handleLinkClick}>
-            <SquareTerminal className="h-7 w-7 text-primary" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-7 w-7 text-primary"
+            >
+              <rect x="3" y="3" width="14" height="10" rx="1"></rect>
+              <line x1="10" y1="13" x2="10" y2="17"></line>
+              <line x1="7" y1="17" x2="13" y2="17"></line>
+              <circle cx="18" cy="8" r="2"></circle>
+              <path d="M16 10c0 1.1.9 2 2 2s2-.9 2-2"></path>
+              <rect x="14" y="13" width="8" height="3" rx="0.5"></rect>
+            </svg>
           </Link>
           <div className="relative flex-grow"> 
             <Input
@@ -114,10 +132,8 @@ export function Header({ onSearchSubmit }: HeaderProps) {
                 ))}
               </nav>
               <div className="mt-auto border-t pt-4 space-y-4 flex flex-col items-center">
-                {/* AnalogClock for mobile sheet moved here in previous steps, keeping it if user wants */}
-                 {/* <AnalogClock clockSize={60} className="mb-2"/>  */}
-                 {/* ThemeToggle moved into sheet previously, keeping it if user wants */}
-                 {/* <ThemeToggle /> */}
+                 {/* AnalogClock for mobile sheet was removed in previous steps */}
+                 {/* ThemeToggle could be here if needed, but currently in main header */}
               </div>
             </SheetContent>
           </Sheet>
