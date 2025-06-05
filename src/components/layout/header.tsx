@@ -5,32 +5,36 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react"; // Removed SquareTerminal
+import { Menu, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-// AnalogClock import was removed in a previous step, ensuring it's not re-added
+import AnalogClock from "@/components/analog-clock"; // Keep if used in mobile sheet
 
 const navItems = [
   { label: "About", href: "/#about" },
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
   { label: "Internships", href: "/#internships" },
+  { label: "GitHub", href: "/#github-activity"},
   { label: "Achievements", href: "/#achievements" },
   { label: "Certifications", href: "/#certifications" },
   { label: "Contact", href: "/contact" },
 ];
 
-interface HeaderProps {
-  onSearchSubmit?: (query: string) => void;
-}
-
-export function Header({ onSearchSubmit }: HeaderProps) {
+export function Header() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (url?: string) => {
     setIsSheetOpen(false);
+    if (url && url.startsWith("/#")) {
+        const id = url.substring(2);
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
   };
 
   const clearSearch = () => {
@@ -39,17 +43,28 @@ export function Header({ onSearchSubmit }: HeaderProps) {
   };
 
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && searchText.trim() !== "") {
-      onSearchSubmit?.(searchText.trim());
-      // clearSearch(); // Optionally clear search after submit, or let AiAssistant handle it
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent default form submission if any
+      const query = searchText.trim().toLowerCase();
+      if (query) {
+        const element = document.getElementById(query);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearSearch(); 
+        } else {
+          // Element not found, keep text in search bar for user to see/modify
+          // Optionally, show a toast message: "Section not found"
+          console.warn(`Element with ID '${query}' not found on this page.`);
+        }
+      }
     }
   };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between gap-2 md:gap-4">
-        <div className="flex items-center gap-2 flex-shrink min-w-0 md:flex-1">
-          <Link href="/" className="flex items-center mr-0 md:mr-2 flex-shrink-0" onClick={handleLinkClick}>
+        <div className="flex items-center gap-2 flex-shrink-0 md:flex-none">
+          <Link href="/" className="flex items-center mr-0 md:mr-2" onClick={() => handleLinkClick('/')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -70,11 +85,13 @@ export function Header({ onSearchSubmit }: HeaderProps) {
               <rect x="14" y="13" width="8" height="3" rx="0.5"></rect>
             </svg>
           </Link>
-          <div className="relative flex-grow"> 
+        </div>
+        
+        <div className="relative flex-grow md:flex-1 min-w-0"> 
             <Input
               ref={searchInputRef}
               type="search"
-              placeholder="Ask AI Assistant..."
+              placeholder="Search sections (e.g. 'skills', 'projects')..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onKeyDown={handleSearchKeyDown}
@@ -91,7 +108,6 @@ export function Header({ onSearchSubmit }: HeaderProps) {
                 <X className="h-4 w-4" />
               </Button>
             )}
-          </div>
         </div>
 
         <div className="flex items-center gap-1 md:gap-2">
@@ -100,6 +116,14 @@ export function Header({ onSearchSubmit }: HeaderProps) {
               <Link
                 key={item.label}
                 href={item.href}
+                onClick={(e) => {
+                  if (item.href.startsWith("/#")) {
+                    e.preventDefault();
+                    handleLinkClick(item.href);
+                  } else {
+                    handleLinkClick();
+                  }
+                }}
                 className="font-medium text-foreground/80 hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border hover:bg-muted rounded-md"
               >
                 {item.label}
@@ -124,16 +148,22 @@ export function Header({ onSearchSubmit }: HeaderProps) {
                   <Link
                     key={item.label}
                     href={item.href}
+                    onClick={(e) => {
+                      if (item.href.startsWith("/#")) {
+                        e.preventDefault();
+                        handleLinkClick(item.href);
+                      } else {
+                        handleLinkClick();
+                      }
+                    }}
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors block px-3 py-2.5 border border-border/70 hover:bg-muted rounded-md"
-                    onClick={handleLinkClick}
                   >
                     {item.label}
                   </Link>
                 ))}
               </nav>
               <div className="mt-auto border-t pt-4 space-y-4 flex flex-col items-center">
-                 {/* AnalogClock for mobile sheet was removed in previous steps */}
-                 {/* ThemeToggle could be here if needed, but currently in main header */}
+                 {/* AnalogClock for mobile sheet was removed earlier */}
               </div>
             </SheetContent>
           </Sheet>

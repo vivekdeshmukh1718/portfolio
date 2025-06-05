@@ -6,7 +6,7 @@ import { Zap, Code, Database, Brain } from "lucide-react";
 const skillsData = {
   frontend: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"],
   backend: ["Node.js", "Express.js", "Firebase Functions"],
-  database: ["Firebase Firestore", "MongoDB", "SQL"],
+  database: ["Firebase Firestore", "MongoDB", "SQL", "PostgreSQL"],
   toolsAi: ["Git & GitHub", "Genkit", "Docker", "Vercel", "REST APIs", "GraphQL"]
 };
 

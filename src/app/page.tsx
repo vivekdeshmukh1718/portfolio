@@ -1,7 +1,7 @@
 
 "use client";
 import type { FC } from 'react'; 
-import { useState } from "react"; 
+// import { useState } from "react"; // No longer needed for header search
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -11,25 +11,25 @@ import { ProjectGallerySection } from "@/components/sections/project-gallery-sec
 import { InternshipOverviewSection } from "@/components/sections/internship-overview-section";
 import { AchievementsSection } from "@/components/sections/achievements-section";
 import { CertificationsSection } from "@/components/sections/certifications-section";
-import { GitHubActivitySection } from "@/components/sections/github-activity-section"; // Added import
+import { GitHubActivitySection } from "@/components/sections/github-activity-section";
 import { AiIdeaGeneratorSection } from "@/components/sections/ai-idea-generator-section";
 import { VisitorStatsSection } from "@/components/sections/visitor-stats-section";
 import { AiAssistant } from "@/components/ai-assistant";
 
 export default function HomePage() {
-  const [headerSearchQuery, setHeaderSearchQuery] = useState<string | null>(null);
+  // const [headerSearchQuery, setHeaderSearchQuery] = useState<string | null>(null); // Removed
 
-  const handleHeaderSearchSubmit = (query: string) => {
-    setHeaderSearchQuery(query);
-  };
+  // const handleHeaderSearchSubmit = (query: string) => { // Removed
+  //   setHeaderSearchQuery(query);
+  // };
 
-  const handleAiAssistantOpenedWithQuery = () => {
-    setHeaderSearchQuery(null); 
-  };
+  // const handleAiAssistantOpenedWithQuery = () => { // Removed
+  //   setHeaderSearchQuery(null); 
+  // };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header onSearchSubmit={handleHeaderSearchSubmit} />
+      <Header />
       <main className="flex-grow">
         <HeroSection />
         <AboutMeSection />
@@ -43,10 +43,7 @@ export default function HomePage() {
         <AiIdeaGeneratorSection /> 
       </main>
       <Footer />
-      <AiAssistant 
-        triggerOpenWithQuery={headerSearchQuery}
-        onProgrammaticOpenHandled={handleAiAssistantOpenedWithQuery}
-      />
+      <AiAssistant />
     </div>
   );
 }
