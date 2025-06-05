@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight, Terminal } from "lucide-react";
 import Image from "next/image";
@@ -25,6 +25,33 @@ export function HeroSection() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [typedShellCommand, setTypedShellCommand] = useState("");
   const shellCommandTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !audioCtxRef.current) {
+      audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+  }, []);
+
+  const playTypingSound = useCallback(() => {
+    if (!audioCtxRef.current) return;
+    const audioCtx = audioCtxRef.current;
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.type = 'triangle'; 
+    oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime); 
+    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.05);
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + 0.05);
+  }, []);
+
 
   useEffect(() => {
     const currentPhrase = phrasesToType[phraseIndex];
@@ -37,7 +64,6 @@ export function HeroSection() {
         } else {
           setIsDeleting(false);
           setPhraseIndex((prev) => (prev + 1) % phrasesToType.length);
-          timerRef.current = setTimeout(handleType, DELAY_AFTER_DELETING);
         }
       } else {
         if (typedText.length < currentPhrase.length) {
@@ -46,26 +72,21 @@ export function HeroSection() {
         } else {
           timerRef.current = setTimeout(() => {
             setIsDeleting(true);
-            // No need to call handleType here, it will be triggered by state change
           }, DELAY_AFTER_TYPING);
         }
       }
     };
     
-    // Initial call needs to be careful not to run during deletion phase from previous phrase
-    if (!isDeleting && typedText.length < currentPhrase.length) {
-       timerRef.current = setTimeout(handleType, TYPING_SPEED);
-    } else if (isDeleting && typedText.length > 0) {
-       timerRef.current = setTimeout(handleType, DELETING_SPEED);
-    } else if (!isDeleting && typedText.length === currentPhrase.length) {
-      // This case handles the delay AFTER typing finishes, before deletion starts
+    if (isDeleting && typedText.length > 0) {
+      timerRef.current = setTimeout(handleType, DELETING_SPEED);
+    } else if (!isDeleting && typedText.length < currentPhrase.length) {
+      timerRef.current = setTimeout(handleType, TYPING_SPEED);
+    } else if (!isDeleting && typedText.length === currentPhrase.length) { 
       timerRef.current = setTimeout(() => setIsDeleting(true), DELAY_AFTER_TYPING);
-    } else if (isDeleting && typedText.length === 0) {
-      // This case handles delay AFTER deletion, before next phrase
-      timerRef.current = setTimeout(() => {
+    } else if (isDeleting && typedText.length === 0) { 
+       timerRef.current = setTimeout(() => {
         setIsDeleting(false);
         setPhraseIndex((prev) => (prev + 1) % phrasesToType.length);
-        // Next phrase typing will be triggered by phraseIndex change
       }, DELAY_AFTER_DELETING);
     }
 
@@ -80,6 +101,7 @@ export function HeroSection() {
   useEffect(() => {
     if (typedShellCommand.length < initialShellCommand.length) {
       shellCommandTimerRef.current = setTimeout(() => {
+        if (audioCtxRef.current) playTypingSound(); 
         setTypedShellCommand(initialShellCommand.substring(0, typedShellCommand.length + 1));
       }, SHELL_COMMAND_TYPING_SPEED);
     }
@@ -88,7 +110,7 @@ export function HeroSection() {
         clearTimeout(shellCommandTimerRef.current);
       }
     };
-  }, [typedShellCommand]);
+  }, [typedShellCommand, playTypingSound]);
 
 
   return (
@@ -114,7 +136,7 @@ export function HeroSection() {
                 <span className="text-gray-500">// Passionate about building scalable and user-centric web applications.</span>
               </p>
             </div>
-            <div className="flex flex-col gap-3 min-[400px]:flex-row pt-4 mt-2 border-2 border-solid border-green-500 p-4 rounded-md bg-white">
+            <div className="flex flex-col gap-3 sm:flex-row pt-4 mt-2 border-2 border-solid border-green-500 p-4 rounded-md bg-white">
               <Button 
                 size="lg" 
                 asChild 
