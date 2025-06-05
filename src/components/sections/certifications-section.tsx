@@ -8,7 +8,7 @@ interface Certification {
   name: string;
   issuingOrganization: string;
   dateObtained: string;
-  description?: string; 
+  description?: string;
   credentialUrl?: string;
 }
 
@@ -18,21 +18,63 @@ const certificationsData: Certification[] = [
     name: "Google Cloud Certified - Associate Cloud Engineer",
     issuingOrganization: "Google Cloud",
     dateObtained: "January 2024",
-    credentialUrl: "#", 
+    credentialUrl: "#",
   },
   {
     id: "2",
     name: "Certified JavaScript Developer",
     issuingOrganization: "OnlineDegree Corp",
     dateObtained: "June 2023",
-    // credentialUrl: "#", 
+    // credentialUrl: "#",
   },
   {
     id: "3",
     name: "Advanced React Patterns",
     issuingOrganization: "Dev University",
     dateObtained: "December 2023",
-    credentialUrl: "#", 
+    credentialUrl: "#",
+  },
+  {
+    id: "4",
+    name: "AWS Certified Solutions Architect - Associate",
+    issuingOrganization: "Amazon Web Services",
+    dateObtained: "March 2024",
+    credentialUrl: "#",
+  },
+  {
+    id: "5",
+    name: "Full-Stack Web Development Bootcamp",
+    issuingOrganization: "CodeAcademy Pro",
+    dateObtained: "August 2023",
+    // credentialUrl: "#",
+  },
+  {
+    id: "6",
+    name: "Certified Genkit AI Developer",
+    issuingOrganization: "AI Innovators Institute",
+    dateObtained: "February 2024",
+    credentialUrl: "#",
+  },
+  {
+    id: "7",
+    name: "Cybersecurity Fundamentals",
+    issuingOrganization: "SecureTech Academy",
+    dateObtained: "November 2023",
+    credentialUrl: "#",
+  },
+  {
+    id: "8",
+    name: "Agile Project Management with Scrum",
+    issuingOrganization: "Agile Masters Org",
+    dateObtained: "September 2023",
+    // credentialUrl: "#",
+  },
+  {
+    id: "9",
+    name: "Node.js Backend Professional",
+    issuingOrganization: "ServerSide Experts",
+    dateObtained: "July 2023",
+    credentialUrl: "#",
   },
 ];
 
