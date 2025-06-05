@@ -55,12 +55,12 @@ export function AboutMeSection() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="https://placehold.co/550x550.png"
+              src="https://placehold.co/600x800.png"
               alt="About Vivek"
               data-ai-hint="developer working computer"
-              width={550}
-              height={550}
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full"
+              width={600}
+              height={800}
+              className="mx-auto overflow-hidden rounded-xl object-cover sm:w-full"
             />
           </div>
         </div>
