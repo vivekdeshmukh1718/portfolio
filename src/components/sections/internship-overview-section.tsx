@@ -58,7 +58,7 @@ export function InternshipOverviewSection() {
         </div>
         <div className="space-y-8">
           {internshipsData.map((internship) => (
-            <Card key={internship.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card key={internship.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/80 dark:bg-card/70 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                     <div>

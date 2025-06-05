@@ -91,7 +91,7 @@ export function HeroSection() {
                 asChild 
                 className="font-sans bg-blue-500 hover:bg-blue-600 text-white dark:text-white" 
               >
-                <a href="/resume.pdf" download="Vivek_Deshmukh_Resume.pdf">
+                <a href="https://drive.google.com/file/d/1fPqq2Vrwr1B9P4XZjTb_crdcOitKu1-D/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />
                   Download CV
                 </a>

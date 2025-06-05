@@ -18,7 +18,7 @@ interface SkillCategoryProps {
 
 function SkillCategory({ title, skills, icon }: SkillCategoryProps) {
   return (
-    <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/80 dark:bg-card/70 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-xl">
           {icon}

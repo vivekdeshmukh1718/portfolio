@@ -46,7 +46,7 @@ export function AchievementsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {achievementsData.map((achievement) => (
-            <Card key={achievement.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <Card key={achievement.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col bg-card/80 dark:bg-card/70 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center gap-3 mb-2">
                   <Award className="h-8 w-8 text-primary" />

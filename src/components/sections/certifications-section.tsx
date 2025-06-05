@@ -8,7 +8,7 @@ interface Certification {
   name: string;
   issuingOrganization: string;
   dateObtained: string;
-  description?: string; // Optional: for a brief description if needed in the future
+  description?: string; 
   credentialUrl?: string;
 }
 
@@ -18,21 +18,21 @@ const certificationsData: Certification[] = [
     name: "Google Cloud Certified - Associate Cloud Engineer",
     issuingOrganization: "Google Cloud",
     dateObtained: "January 2024",
-    credentialUrl: "#", // Replace with actual URL
+    credentialUrl: "#", 
   },
   {
     id: "2",
     name: "Certified JavaScript Developer",
     issuingOrganization: "OnlineDegree Corp",
     dateObtained: "June 2023",
-    // credentialUrl: "#", // Example without URL
+    // credentialUrl: "#", 
   },
   {
     id: "3",
     name: "Advanced React Patterns",
     issuingOrganization: "Dev University",
     dateObtained: "December 2023",
-    credentialUrl: "#", // Replace with actual URL
+    credentialUrl: "#", 
   },
 ];
 
@@ -48,7 +48,7 @@ export function CertificationsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {certificationsData.map((cert) => (
-            <Card key={cert.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <Card key={cert.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col bg-card/80 dark:bg-card/70 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center gap-3 mb-2">
                     <FileText className="h-8 w-8 text-primary" />

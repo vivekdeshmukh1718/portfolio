@@ -51,7 +51,7 @@ const projectsData: Project[] = [
     imageHint: "chatbot artificial intelligence",
     tags: ["Genkit", "Next.js", "AI", "NLP"],
     category: "AI",
-    githubUrl: "#", // Added GitHub URL placeholder
+    githubUrl: "#", 
     liveUrl: "#",
   },
    {
@@ -70,7 +70,7 @@ const projectsData: Project[] = [
 const categories = ["All", "Web", "Mobile", "AI"];
 
 const ProjectCard: FC<Project> = ({ title, description, imageUrl, imageHint, tags, githubUrl, liveUrl }) => (
-  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-card/80 dark:bg-card/70 backdrop-blur-sm">
     <Image src={imageUrl} alt={title} data-ai-hint={imageHint} width={600} height={400} className="w-full h-48 object-cover" />
     <CardHeader>
       <CardTitle>{title}</CardTitle>
