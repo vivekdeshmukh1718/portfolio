@@ -97,7 +97,7 @@ export function AiAssistant({ triggerOpenWithQuery, onProgrammaticOpenHandled }:
             className="fixed bottom-6 right-6 rounded-full shadow-lg w-16 h-16 p-0 z-50 flex items-center justify-center bg-purple-600 text-white hover:bg-purple-700"
             aria-label="Open AI Assistant"
           >
-            <Bot className="h-14 w-14" />
+            <Bot className="h-16 w-16 text-teal-300" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] md:max-w-lg flex flex-col h-[70vh] max-h-[600px]">
