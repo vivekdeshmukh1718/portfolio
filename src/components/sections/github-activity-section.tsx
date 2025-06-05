@@ -18,7 +18,7 @@ export function GitHubActivitySection() {
             A glimpse into my coding contributions and consistency.
           </p>
         </div>
-        <Card className="w-full max-w-4xl mx-auto shadow-xl bg-card/80 dark:bg-card/70 backdrop-blur-sm">
+        <Card className="w-full max-w-4xl mx-auto bg-card/80 dark:bg-card/70 backdrop-blur-sm transform-gpu transition-all duration-300 ease-out hover:shadow-2xl hover:[transform:translateZ(20px)_rotateX(2deg)_rotateY(-1deg)] [perspective:1200px]">
           <CardHeader>
             <CardTitle className="text-center text-2xl">Contribution Graph</CardTitle>
           </CardHeader>

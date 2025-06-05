@@ -44,9 +44,9 @@ export function AchievementsSection() {
             Milestones and recognitions that mark my journey.
           </p>        
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 [perspective:1200px]">
           {achievementsData.map((achievement) => (
-            <Card key={achievement.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col bg-card/80 dark:bg-card/70 backdrop-blur-sm">
+            <Card key={achievement.id} className="shadow-lg flex flex-col bg-card/80 dark:bg-card/70 backdrop-blur-sm transform-gpu transition-all duration-300 ease-out hover:shadow-xl hover:[transform:translateZ(25px)_rotateX(4deg)_rotateY(-2deg)]">
               <CardHeader>
                 <div className="flex items-center gap-3 mb-2">
                   <Award className="h-8 w-8 text-primary" />

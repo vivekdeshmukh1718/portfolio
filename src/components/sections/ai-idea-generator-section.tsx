@@ -62,7 +62,7 @@ export function AiIdeaGeneratorSection() {
           </p>
         </div>
 
-        <Card className="w-full max-w-2xl mx-auto shadow-xl">
+        <Card className="w-full max-w-2xl mx-auto shadow-xl transform-gpu transition-all duration-300 ease-out hover:shadow-2xl hover:[transform:translateZ(20px)_rotateX(2deg)_rotateY(-1deg)] [perspective:1000px]">
           <CardHeader>
             <CardTitle>Project Idea Generator</CardTitle>
             <CardDescription>
@@ -118,7 +118,7 @@ export function AiIdeaGeneratorSection() {
         )}
 
         {generatedIdea && !isLoading && !error && (
-          <Card className="w-full max-w-2xl mx-auto mt-8 shadow-2xl bg-gradient-to-br from-card to-secondary/20 dark:to-secondary/5">
+          <Card className="w-full max-w-2xl mx-auto mt-8 shadow-2xl bg-gradient-to-br from-card to-secondary/20 dark:to-secondary/5 transform-gpu transition-all duration-300 ease-out hover:shadow-2xl hover:[transform:translateZ(20px)_rotateX(2deg)_rotateY(-1deg)] [perspective:1000px]">
             <CardHeader className="pb-2">
               <p className="text-sm text-primary font-semibold tracking-wider uppercase">Your AI-Generated Project Idea:</p>
               <CardTitle className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary py-1">

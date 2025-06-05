@@ -18,7 +18,7 @@ interface SkillCategoryProps {
 
 function SkillCategory({ title, skills, icon }: SkillCategoryProps) {
   return (
-    <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/80 dark:bg-card/70 backdrop-blur-sm">
+    <Card className="shadow-md bg-card/80 dark:bg-card/70 backdrop-blur-sm transform-gpu transition-all duration-300 ease-out hover:shadow-xl hover:[transform:translateZ(25px)_rotateX(4deg)_rotateY(-2deg)]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-xl">
           {icon}
@@ -46,7 +46,7 @@ export function SkillsShowcaseSection() {
             A diverse toolkit to build robust and innovative solutions.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 [perspective:1200px]">
           <SkillCategory title="Frontend Development" skills={skillsData.frontend} icon={<Zap className="h-5 w-5 text-primary" />} />
           <SkillCategory title="Backend Development" skills={skillsData.backend} icon={<Code className="h-5 w-5 text-primary" />} />
           <SkillCategory title="Databases" skills={skillsData.database} icon={<Database className="h-5 w-5 text-primary" />} />

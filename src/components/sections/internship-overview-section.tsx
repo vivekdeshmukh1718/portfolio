@@ -56,9 +56,9 @@ export function InternshipOverviewSection() {
             Hands-on experience in dynamic tech environments, contributing to real-world projects.
           </p>
         </div>
-        <div className="space-y-8">
+        <div className="space-y-8 [perspective:1200px]">
           {internshipsData.map((internship) => (
-            <Card key={internship.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/80 dark:bg-card/70 backdrop-blur-sm">
+            <Card key={internship.id} className="shadow-lg bg-card/80 dark:bg-card/70 backdrop-blur-sm transform-gpu transition-all duration-300 ease-out hover:shadow-xl hover:[transform:translateZ(25px)_rotateX(4deg)_rotateY(-2deg)]">
               <CardHeader>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                     <div>

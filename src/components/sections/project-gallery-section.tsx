@@ -92,7 +92,7 @@ const projectsData: Project[] = [
 const categories = ["All", "Web", "Mobile", "AI"];
 
 const ProjectCard: FC<Project> = ({ title, description, imageUrl, imageHint, tags, githubUrl, liveUrl }) => (
-  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-card/80 dark:bg-card/70 backdrop-blur-sm">
+  <Card className="overflow-hidden shadow-lg flex flex-col h-full bg-card/80 dark:bg-card/70 backdrop-blur-sm transform-gpu transition-all duration-300 ease-out hover:shadow-2xl hover:[transform:translateZ(25px)_rotateX(4deg)_rotateY(-2deg)]">
     <Image src={imageUrl} alt={title} data-ai-hint={imageHint} width={600} height={400} className="w-full h-48 object-cover" />
     <CardHeader>
       <CardTitle>{title}</CardTitle>
@@ -150,7 +150,7 @@ export function ProjectGallerySection() {
           ))}
         </div>
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 [perspective:1200px]">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} {...project} />
             ))}
