@@ -12,7 +12,7 @@ export function VisitorStatsSection() {
             <Globe className="h-8 w-8 text-primary" />
             Global Reach
           </h2>
-          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="max-w-[900px] text-muted-foreground text-base sm:text-lg md:text-xl/relaxed">
             Connecting with minds across the globe. This is a simulated visitor count for demonstration.
           </p>
         </div>

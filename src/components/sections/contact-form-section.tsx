@@ -81,7 +81,7 @@ export function ContactFormSection() {
         <Card className="w-full max-w-2xl shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold tracking-tighter sm:text-4xl">Get In Touch</CardTitle>
-            <CardDescription className="text-muted-foreground md:text-xl/relaxed">
+            <CardDescription className="text-muted-foreground text-base sm:text-lg md:text-xl/relaxed">
               Have a question or want to work together? Send me a message!
             </CardDescription>
           </CardHeader>

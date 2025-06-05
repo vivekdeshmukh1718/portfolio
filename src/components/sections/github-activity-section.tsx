@@ -14,7 +14,7 @@ export function GitHubActivitySection() {
             <LineChart className="h-8 w-8 text-primary" />
             My GitHub Activity
           </h2>
-          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="max-w-[900px] text-muted-foreground text-base sm:text-lg md:text-xl/relaxed">
             A glimpse into my coding contributions and consistency.
           </p>
         </div>
