@@ -36,10 +36,10 @@ const certificationsData: Certification[] = [
   },
   {
     id: "4",
-    name: "AWS Certified Solutions Architect - Associate",
+    name: "Goldman Sachs operations job simulation",
     issuingOrganization: "Amazon Web Services",
-    dateObtained: "March 2024",
-    credentialUrl: "https://www.udemy.com/certificate/UC-e4faefdf-754a-4695-b8dd-09f353e02e32/",
+    dateObtained: "December 2024",
+    credentialUrl: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/MBA4MnZTNFEoJZGnk/wNge9cjzNTXD2acrv_MBA4MnZTNFEoJZGnk_5nQS9H7L8RBgCR87E_1734077908313_completion_certificate.pdf",
   },
   {
     id: "5",
