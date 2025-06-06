@@ -75,7 +75,7 @@ const projectsData: Project[] = [
     tags: ["React", "Recharts", "TypeScript", "Data Visualization"],
     category: "Web",
     githubUrl: "https://github.com/ShripalMetals/E-tyre-server",
-    liveUrl: "#",
+    liveUrl: "https://www.retyre.co.in/",
   },
   {
     id: "6",
@@ -86,7 +86,7 @@ const projectsData: Project[] = [
     tags: ["Genkit", "Python", "AI", "Computer Vision"],
     category: "AI",
     githubUrl: "#",
-    liveUrl: "#",
+    liveUrl: "https://www.augmen.io/",
   },
 ];
 
