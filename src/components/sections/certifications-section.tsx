@@ -55,27 +55,6 @@ const certificationsData: Certification[] = [
     dateObtained: "February 2024",
     credentialUrl: "#",
   },
-  {
-    id: "7",
-    name: "Cybersecurity Fundamentals",
-    issuingOrganization: "SecureTech Academy",
-    dateObtained: "November 2023",
-    credentialUrl: "#",
-  },
-  {
-    id: "8",
-    name: "Agile Project Management with Scrum",
-    issuingOrganization: "Agile Masters Org",
-    dateObtained: "September 2023",
-    // credentialUrl: "#",
-  },
-  {
-    id: "9",
-    name: "Node.js Backend Professional",
-    issuingOrganization: "ServerSide Experts",
-    dateObtained: "July 2023",
-    credentialUrl: "#",
-  },
 ];
 
 export function CertificationsSection() {
