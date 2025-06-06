@@ -56,8 +56,8 @@ export function AboutMeSection() {
           <div className="flex items-center justify-center">
             <Image
               src="https://placehold.co/600x800.png"
-              alt="About Vivek"
-              data-ai-hint="developer working computer"
+              alt="Vivek Deshmukh holding an award in front of an engineering department building"
+              data-ai-hint="student award building"
               width={600}
               height={800}
               className="mx-auto overflow-hidden rounded-xl object-cover sm:w-full"
