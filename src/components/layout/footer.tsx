@@ -1,8 +1,12 @@
 
+"use client";
+
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Mail, Instagram } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, Instagram, Star } from "lucide-react"; // Added Star
 import { Button } from "@/components/ui/button";
 import DigitalClock from "@/components/digital-clock";
+import { useState, useEffect } from "react"; // Added useState, useEffect
+import { cn } from "@/lib/utils"; // Added cn
 
 // Simple SVG for WhatsApp
 const WhatsAppIcon = () => (
@@ -20,6 +24,29 @@ const TelegramIcon = () => (
 
 
 export function Footer() {
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // This ensures the component only renders rating logic on the client-side
+    // to prevent hydration errors with initial state of rating/hoverRating.
+    setIsClient(true);
+  }, []);
+
+  const handleRatingClick = (rate: number) => {
+    setRating(rate);
+    // In a real app, you might submit this rating to a backend here.
+  };
+
+  const handleStarMouseOver = (rate: number) => {
+    setHoverRating(rate);
+  };
+
+  const handleStarContainerMouseLeave = () => {
+    setHoverRating(0); // Reset hover visual when mouse leaves the star container
+  };
+
   return (
     <footer className="border-t border-border/40">
       <div className="container flex flex-col items-center justify-center gap-4 py-10 md:py-6">
@@ -66,6 +93,48 @@ export function Footer() {
             </Link>
           </Button>
         </div>
+
+        {/* Rate My Portfolio Section */}
+        {isClient && ( // Only render client-side state dependent UI after mount
+          <div className="mt-6 text-center w-full">
+            <p className="text-md font-medium text-foreground mb-2">
+              Rate My Portfolio
+            </p>
+            <div
+              className="flex justify-center items-center space-x-1"
+              onMouseLeave={handleStarContainerMouseLeave}
+            >
+              {[1, 2, 3, 4, 5].map((starValue) => (
+                <button
+                  key={starValue}
+                  onClick={() => handleRatingClick(starValue)}
+                  onMouseOver={() => handleStarMouseOver(starValue)}
+                  className="p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+                  aria-label={`Rate ${starValue} out of 5 stars`}
+                >
+                  <Star
+                    className={cn(
+                      "h-7 w-7 transition-colors duration-150",
+                      (hoverRating || rating) >= starValue
+                        ? "text-yellow-400 fill-yellow-400"
+                        : "text-muted-foreground/70 hover:text-yellow-300"
+                    )}
+                  />
+                </button>
+              ))}
+            </div>
+            {rating > 0 && (
+              <p className="text-xs text-muted-foreground mt-2">
+                Thanks for rating {rating} out of 5 stars!
+              </p>
+            )}
+            {/* Placeholder to prevent layout shift when message appears/disappears */}
+            {rating === 0 && (
+                <p className="text-xs text-muted-foreground mt-2 h-4">
+                </p>
+            )}
+          </div>
+        )}
       </div>
     </footer>
   );
