@@ -16,10 +16,10 @@ interface Internship {
 const internshipsData: Internship[] = [
   {
     id: "1",
-    role: "Software Engineer Intern",
-    company: "Tech Solutions Inc.",
-    duration: "Summer 2023 (May - Aug)",
-    location: "Remote",
+    role: "Software Developer",
+    company: "Shripal Metals (Materialyz)",
+    duration: "Summer 2025 (Apr - Nov)",
+    location: "Mumbai, Maharashtra",
     description: [
       "Developed and maintained features for a client-facing web application using React and Node.js.",
       "Collaborated with a team of 5 engineers in an Agile environment.",
@@ -32,14 +32,14 @@ const internshipsData: Internship[] = [
   {
     id: "2",
     role: "Full-Stack Developer Intern",
-    company: "Innovate Labs",
-    duration: "Fall 2022 (Sep - Dec)",
-    location: "San Francisco, CA",
+    company: "Hubnex Labs",
+    duration: "Winter 2025 (Jan - Mar)",
+    location: "Remote",
     description: [
       "Worked on a greenfield project to build a prototype for a new SaaS product.",
-      "Utilized Next.js for frontend and Firebase for backend and authentication.",
+      "Utilized React.js for frontend and MongoDB for backend and authentication.",
       "Implemented key user interface components and backend logic.",
-      "Presented project progress to stakeholders weekly."
+      "Presented project progress to mentors weekly."
     ],
     logoUrl: "https://placehold.co/100x100.png",
     logoHint: "company logo startup"

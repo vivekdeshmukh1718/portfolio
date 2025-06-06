@@ -20,7 +20,7 @@ export function VisitorStatsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
           <div className="lg:col-span-3 relative h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl">
             <Image
-              src="https://placehold.co/1200x600.png"
+              src="/images/global.png"
               alt="Stylized World Map"
               data-ai-hint="world map connections"
               layout="fill"

@@ -40,9 +40,9 @@ export function AboutMeSection() {
               </CardHeader>
               <CardContent className="space-y-2 text-muted-foreground">
                 <p>
-                  <strong>Bachelor of Engineering in Computer Science</strong>
+                  <strong>Bachelor of Technology (SGGSIE&T) </strong>
                   <br />
-                  XYZ University, City, State (Year of Graduation)
+                SRTM University, Nanded, Maharashtra (2025)
                 </p>
                 <p>
                   Relevant Coursework: Data Structures and Algorithms, Web Development, Database Systems, Software Engineering, Artificial Intelligence.
@@ -55,7 +55,7 @@ export function AboutMeSection() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="https://placehold.co/600x800.png"
+              src="/images/about-me.jpg"
               alt="Portrait placeholder image (600x800)"
               data-ai-hint="student award building"
               width={600}

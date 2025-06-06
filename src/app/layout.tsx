@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vivek's Digital Canvas",
+  title: "Vivek's Dev Studio",
   description: "Portfolio of Vivek Kailash Deshmukh, a Full-Stack Developer.",
 };
 

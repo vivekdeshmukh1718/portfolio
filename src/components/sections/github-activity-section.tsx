@@ -25,7 +25,7 @@ export function GitHubActivitySection() {
           <CardContent className="flex flex-col items-center gap-6">
             <div className="w-full overflow-x-auto p-1">
               <Image
-                src="https://placehold.co/960x240.png" // Replace with your actual GitHub contribution graph image URL
+                src="/images/github.png" // Replace with your actual GitHub contribution graph image URL
                 alt="GitHub Contribution Graph"
                 data-ai-hint="github contribution graph" // For future AI image replacement
                 width={960}

@@ -166,7 +166,7 @@ export function HeroSection() {
 
           <div className="flex items-center justify-center [perspective:1000px]">
             <Image
-              src="https://placehold.co/450x600.png"
+              src="/images/vikkie.jpg"
               alt="Vivek Kailash Deshmukh"
               data-ai-hint="professional portrait developer matrix"
               width={450}

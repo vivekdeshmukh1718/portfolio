@@ -39,7 +39,7 @@ Information about Vivek Kailash Deshmukh:
 - He has a strong foundation in modern web technologies and thrives in dynamic environments, continuously learning and adapting.
 
 **Education:**
-- Bachelor of Engineering in Computer Science from XYZ University.
+- Bachelor of technology in Electronics and Communication Engineering from Swami Ramanand Marathwada University (SGGSIE&T), Nanded, Maharashtra (2025).
 - Relevant coursework: Data Structures and Algorithms, Web Development, Database Systems, Software Engineering, Artificial Intelligence.
 - Actively involved in coding clubs and hackathons.
 
