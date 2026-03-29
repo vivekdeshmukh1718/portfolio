@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Zap, Code, Database, Brain } from "lucide-react";
 
 const skillsData = {
-  frontend: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"],
-  backend: ["Node.js", "Express.js", "Firebase Functions"],
+  frontend: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Tailwind CSS",],
+  backend: ["Node.js", "Express.js", "Firebase Functions","Spring Boot"],
   database: ["Firebase Firestore", "MongoDB", "SQL", "PostgreSQL"],
   toolsAi: ["Git & GitHub", "Genkit", "Docker", "Vercel", "REST APIs", "GraphQL"]
 };
